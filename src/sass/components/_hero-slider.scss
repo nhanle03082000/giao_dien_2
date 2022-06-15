@@ -154,10 +154,9 @@
             // }
         }
 
-        // &.active &__image > img {
-        //     transform: scale(1) rotate(0);
-        // }
-        // nhan le test brach tý nhớ mở lại nha ba
+        &.active &__image > img {
+            transform: scale(1) rotate(0);
+        }
     }
 
     &__control {
