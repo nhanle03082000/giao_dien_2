@@ -10,13 +10,13 @@ import { set } from "../redux/product-modal/productModalSlice";
 import Button from "./Button";
 
 import numberWithCommas from "../utils/numberWithCommas";
-
+// trang này là tragn sản phảm chính khi người dùng nhần vào sản phảm cho người dùng có thể
 const ProductCard = (props) => {
   const dispatch = useDispatch();
 
   return (
     <div className="product-card">
-      <Link to={`/catalog/${props.slug}`}>
+      <Link to={`/product/${props.slug}`}>
         <div className="product-card__image">
           <img src={props.img01} alt="" />
           <img src={props.img02} alt="" />
@@ -29,7 +29,7 @@ const ProductCard = (props) => {
                     </span>
                 </div> */}
       </Link>
-      <div className="product-card__btn">
+      {/* <div className="product-card__btn">
         <Button
           size="sm"
           icon="bx bx-add-to-queue"
@@ -38,7 +38,7 @@ const ProductCard = (props) => {
         >
           chọn quà
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -47,7 +47,6 @@ ProductCard.propTypes = {
   img01: PropTypes.string.isRequired,
   img02: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
   slug: PropTypes.string.isRequired,
 };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import Helmet from "../components/Helmet";
 import HeroSlider from "../components/HeroSlider";
@@ -9,11 +8,8 @@ import Grid from "../components/Grid";
 import ProductCard from "../components/ProductCard";
 
 import heroSliderData from "../assets/fake-data/hero-slider";
-import policy from "../assets/fake-data/policy";
 import productData from "../assets/fake-data/products";
-
-import banner from "../assets/images/banner.png";
-// import Product from "../pages/Catalog";
+import Select from "react-select";
 
 const Home = () => {
   const productList = productData.getAllProducts();
@@ -29,19 +25,38 @@ const Home = () => {
       />
       <Section>
         <SectionBody>
-          <Grid col={2} mdCol={5} smCol={1} gap={20}>
-            {policy.map((item, index) => (
-              <PolicyCard
-                name={item.name}
-                description={item.description}
-                icon={item.icon}
-              />
-            ))}
+          <Grid col={2} mdCol={2} smCol={1} gap={20}>
+            <PolicyCard name="jjj" description="{item.description}" />
+            <PolicyCard
+              name="Chào mừng quý khách đến với hệ thống quà tặng của mobifon"
+              description="chúc mừng quý khách nhiều niềm vui trong cuộc sống"
+            />
           </Grid>
         </SectionBody>
       </Section>
       <Section>
         <SectionTitle>quà tặng</SectionTitle>
+        <SectionBody>
+          <Grid col={7}>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              // defaultValue={colourOptions[0]}
+              isClearable={true}
+              name="color"
+              // options={colourOptions}
+            />
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              // defaultValue={colourOptions[0]}
+              isClearable={true}
+              name="color"
+              // options={colourOptions}
+            />
+          </Grid>
+        </SectionBody>
+
         <SectionBody>
           <Grid col={4} mdCol={2} smCol={1} gap={20}>
             {productList.map((item, index) => (

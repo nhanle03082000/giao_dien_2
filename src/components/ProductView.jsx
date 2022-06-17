@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-
 import { withRouter } from "react-router";
-
 import { useDispatch } from "react-redux";
-
 import { addItem } from "../redux/shopping-cart/cartItemsSlide";
 import { remove } from "../redux/product-modal/productModalSlice";
-
 import Button from "./Button";
 import numberWithCommas from "../utils/numberWithCommas";
-
+import useTable from "./controls/useTable";
+import * as Service from "../services/Service";
+import FormInfor from "../components/FormInfor";
+import PopupForm from "../components/PopupForm";
+const headCells = [
+  { id: "fullName", label: "Employee Name" },
+  { id: "email", label: "Email Address (Personal)" },
+  { id: "mobile", label: "Mobile Number" },
+  { id: "department", label: "Department" },
+  { id: "actions", label: "Actions", disableSorting: true },
+];
 const ProductView = (props) => {
   const dispatch = useDispatch();
 
@@ -19,13 +25,10 @@ const ProductView = (props) => {
   if (product === undefined)
     product = {
       title: "",
-      price: "",
       image01: null,
       image02: null,
       categorySlug: "",
-      colors: [],
       slug: "",
-      size: [],
       description: "",
     };
 
@@ -39,14 +42,25 @@ const ProductView = (props) => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const updateQuantity = (type) => {
-    if (type === "plus") {
-      setQuantity(quantity + 1);
-    } else {
-      setQuantity(quantity - 1 < 1 ? 1 : quantity - 1);
-    }
+  const [recordForEdit, setRecordForEdit] = useState(null);
+  const [records, setRecords] = useState(Service.getAllEmployees());
+  const [filterFn, setFilterFn] = useState({
+    fn: (items) => {
+      return items;
+    },
+  });
+  const [openPopup, setOpenPopup] = useState(false);
+  const addOrEdit = (employee, resetForm) => {
+    if (employee.id == 0) Service.insertEmployee(employee);
+    else Service.updateEmployee(employee);
+    resetForm();
+    setRecordForEdit(null);
+    setOpenPopup(false);
+    setRecords(Service.getAllEmployees());
   };
 
+  const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
+    useTable(records, headCells, filterFn);
   useEffect(() => {
     setPreviewImg(product.image01);
     setQuantity(1);
@@ -54,51 +68,9 @@ const ProductView = (props) => {
     setSize(undefined);
   }, [product]);
 
-  const check = () => {
-    if (color === undefined) {
-      alert("Vui lòng chọn màu sắc!");
-      return false;
-    }
-
-    if (size === undefined) {
-      alert("Vui lòng chọn kích cỡ!");
-      return false;
-    }
-
-    return true;
-  };
-
-  const addToCart = () => {
-    if (check()) {
-      let newItem = {
-        slug: product.slug,
-        color: color,
-        size: size,
-        price: product.price,
-        quantity: quantity,
-      };
-      if (dispatch(addItem(newItem))) {
-        alert("Success");
-      } else {
-        alert("Fail");
-      }
-    }
-  };
-
   const goToCart = () => {
-    let newItem = {
-      slug: product.slug,
-      color: color,
-      size: size,
-      price: product.price,
-      quantity: quantity,
-    };
-    if (dispatch(addItem(newItem))) {
-      dispatch(remove());
-      props.history.push("/cart");
-    } else {
-      alert("Fail");
-    }
+    setOpenPopup(true);
+    setRecordForEdit(null);
   };
 
   return (
@@ -139,70 +111,27 @@ const ProductView = (props) => {
           </div>
         </div>
       </div>
+      {/* nnhanle */}
       <div className="product__info">
         <h1 className="product__info__title">{product.title}</h1>
-        {/* <div className="product__info__item">
-          <span className="product__info__item__price">
-            {numberWithCommas(product.price)}
-          </span>
-        </div> */}
-        {/* <div className="product__info__item">
-          <div className="product__info__item__title">Màu sắc</div>
-          <div className="product__info__item__list">
-            {product.colors.map((item, index) => (
-              <div
-                key={index}
-                className={`product__info__item__list__item ${
-                  color === item ? "active" : ""
-                }`}
-                onClick={() => setColor(item)}
-              >
-                <div className={`circle bg-${item}`}></div>
-              </div>
-            ))}
-          </div>
-        </div> */}
-        {/* <div className="product__info__item">
-          <div className="product__info__item__title">Kích cỡ</div>
-          <div className="product__info__item__list">
-            {product.size.map((item, index) => (
-              <div
-                key={index}
-                className={`product__info__item__list__item ${
-                  size === item ? "active" : ""
-                }`}
-                onClick={() => setSize(item)}
-              >
-                <span className="product__info__item__list__item__size">
-                  {item}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div> */}
+
         <div className="product__info__item">
-          <div className="product__info__item__title">Số lượng</div>
-          <div className="product__info__item__quantity">
-            <div
-              className="product__info__item__quantity__btn"
-              onClick={() => updateQuantity("minus")}
-            >
-              <i className="bx bx-minus"></i>
-            </div>
-            <div className="product__info__item__quantity__input">
-              {quantity}
-            </div>
-            <div
-              className="product__info__item__quantity__btn"
-              onClick={() => updateQuantity("plus")}
-            >
-              <i className="bx bx-plus"></i>
-            </div>
-          </div>
+          <Button
+            size="sm"
+            icon="bx bx-add-to-queue"
+            animate={true}
+            onClick={() => goToCart()}
+          >
+            Chọn quà
+          </Button>
         </div>
-        <div className="product__info__item">
-          <Button onClick={() => goToCart()}>mua ngay</Button>
-        </div>
+        <FormInfor
+          title="Xác Nhận Thông Tin"
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}
+        >
+          <PopupForm recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
+        </FormInfor>
       </div>
       <div
         className={`product-description mobile ${

@@ -7,7 +7,7 @@
 
     &__images {
         @include flex(flex-start, flex-start);
-        width: 60%;
+        width: 50%;
         flex-wrap: wrap;
 
         @include tablet {
@@ -46,6 +46,7 @@
         position: sticky;
         top: $header-shrink-height;
         padding-top: 2rem;
+        margin-left: 2rem;
 
         @include mobile {
             position: relative;
@@ -60,11 +61,7 @@
         &__item {
             margin-top: 2rem;
 
-            &__price {
-                color: $main-color;
-                font-size: 2rem;
-                font-weight: 600;
-            }
+     
 
             &__title {
                 font-size: 1.5rem;
