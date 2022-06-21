@@ -95,10 +95,10 @@ const mainNav = [
     path: "/",
   },
 
-  {
-    display: "Liên hệ",
-    path: "/contact",
-  },
+  // {
+  //   display: "Liên hệ",
+  //   path: "/contact",
+  // },
 ];
 
 const Header = () => {
@@ -157,10 +157,63 @@ const Header = () => {
               </div>
             ))}
           </div>
-          <div className="header__menu__right"></div>
         </div>
       </div>
     </div>
+    // <div className="header" ref={headerRef}>
+    //   <div className="container">
+    //     <div className="header__logo">
+    //       <Link to="/">
+    //         <img src={logo} alt="" />
+    //       </Link>
+    //     </div>
+    //     <div className="header__menu">
+    //       <div className="header__menu__mobile-toggle" onClick={menuToggle}>
+    //         <div className="hear__menubar">
+    //           <i className="bx bx-menu-alt-left"></i>
+    //         </div>
+    //       </div>
+    //       <div className="header__menu__left" ref={menuLeft}>
+    //         <div className="header__menu__left__close" onClick={menuToggle}>
+    //           <i className="bx bx-chevron-left"></i>
+    //         </div>
+    //         {mainNav.map((item, index) => (
+    //           <div
+    //             key={index}
+    //             className={`header__menu__item header__menu__left__item ${
+    //               index === activeNav ? "active" : ""
+    //             }`}
+    //             onClick={menuToggle}
+    //           >
+    //             <Link to={item.path}>
+    //               <span>{item.display}</span>
+    //             </Link>
+    //           </div>
+    //         ))}
+    //       </div>
+    //       {/* <div className="header__menu__right">
+    //         <div className="header__menu__left" ref={menuLeft}>
+    //           <div className="header__menu__left__close" onClick={menuToggle}>
+    //             <i className="bx bx-chevron-left"></i>
+    //           </div>
+    //           {mainNav.map((item, index) => (
+    //             <div
+    //               key={index}
+    //               className={`header__menu__item header__menu__left__item ${
+    //                 index === activeNav ? "active" : ""
+    //               }`}
+    //               onClick={menuToggle}
+    //             >
+    //               <Link to={item.path}>
+    //                 <span>{item.display}</span>
+    //               </Link>
+    //             </div>
+    //           ))}
+    //         </div>
+    //       </div> */}
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 

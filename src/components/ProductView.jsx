@@ -1,25 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
-import { useDispatch } from "react-redux";
-import { addItem } from "../redux/shopping-cart/cartItemsSlide";
-import { remove } from "../redux/product-modal/productModalSlice";
 import Button from "./Button";
-import numberWithCommas from "../utils/numberWithCommas";
-import useTable from "./controls/useTable";
 import * as Service from "../services/Service";
 import FormInfor from "../components/FormInfor";
 import PopupForm from "../components/PopupForm";
-const headCells = [
-  { id: "fullName", label: "Employee Name" },
-  { id: "email", label: "Email Address (Personal)" },
-  { id: "mobile", label: "Mobile Number" },
-  { id: "department", label: "Department" },
-  { id: "actions", label: "Actions", disableSorting: true },
-];
+// const headCells = [
+//   { id: "fullName", label: "Employee Name" },
+//   { id: "email", label: "Email Address (Personal)" },
+//   { id: "mobile", label: "Mobile Number" },
+//   { id: "department", label: "Department" },
+//   { id: "actions", label: "Actions", disableSorting: true },
+// ];
 const ProductView = (props) => {
-  const dispatch = useDispatch();
-
   let product = props.product;
 
   if (product === undefined)
@@ -27,7 +20,6 @@ const ProductView = (props) => {
       title: "",
       image01: null,
       image02: null,
-      categorySlug: "",
       slug: "",
       description: "",
     };
@@ -36,37 +28,28 @@ const ProductView = (props) => {
 
   const [descriptionExpand, setDescriptionExpand] = useState(false);
 
-  const [color, setColor] = useState(undefined);
-
-  const [size, setSize] = useState(undefined);
-
-  const [quantity, setQuantity] = useState(1);
-
   const [recordForEdit, setRecordForEdit] = useState(null);
-  const [records, setRecords] = useState(Service.getAllEmployees());
-  const [filterFn, setFilterFn] = useState({
-    fn: (items) => {
-      return items;
-    },
-  });
+  // const [records, setRecords] = useState(Service.getAllEmployees());
+  // const [filterFn, setFilterFn] = useState({
+  //   fn: (items) => {
+  //     return items;
+  //   },
+  // });
   const [openPopup, setOpenPopup] = useState(false);
   const addOrEdit = (employee, resetForm) => {
-    if (employee.id == 0) Service.insertEmployee(employee);
+    if (employee.id === 0) Service.insertEmployee(employee);
     else Service.updateEmployee(employee);
     resetForm();
     setRecordForEdit(null);
     setOpenPopup(false);
-    setRecords(Service.getAllEmployees());
+    // setRecords(Service.getAllEmployees());
   };
 
-  const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
-    useTable(records, headCells, filterFn);
-  useEffect(() => {
-    setPreviewImg(product.image01);
-    setQuantity(1);
-    setColor(undefined);
-    setSize(undefined);
-  }, [product]);
+  // const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
+  //   useTable(records, headCells, filterFn);
+  // useEffect(() => {
+  //   setPreviewImg(product.image01);
+  // }, [product]);
 
   const goToCart = () => {
     setOpenPopup(true);
@@ -96,7 +79,7 @@ const ProductView = (props) => {
         <div
           className={`product-description ${descriptionExpand ? "expand" : ""}`}
         >
-          <div className="product-description__title">Chi tiết sản phẩm 1</div>
+          <div className="product-description__title">Chi tiết sản phẩm </div>
           <div
             className="product-description__content"
             dangerouslySetInnerHTML={{ __html: product.description }}
@@ -138,7 +121,7 @@ const ProductView = (props) => {
           descriptionExpand ? "expand" : ""
         }`}
       >
-        <div className="product-description__title">Chi tifffffết sản phẩm</div>
+        <div className="product-description__title">Chi tiết sản phẩm</div>
         <div
           className="product-description__content"
           dangerouslySetInnerHTML={{ __html: product.description }}

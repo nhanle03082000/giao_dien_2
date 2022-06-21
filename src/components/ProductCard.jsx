@@ -3,17 +3,8 @@ import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-
-import { set } from "../redux/product-modal/productModalSlice";
-
-import Button from "./Button";
-
-import numberWithCommas from "../utils/numberWithCommas";
 // trang này là tragn sản phảm chính khi người dùng nhần vào sản phảm cho người dùng có thể
 const ProductCard = (props) => {
-  const dispatch = useDispatch();
-
   return (
     <div className="product-card">
       <Link to={`/product/${props.slug}`}>

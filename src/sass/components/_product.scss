@@ -7,7 +7,7 @@
 
     &__images {
         @include flex(flex-start, flex-start);
-        width: 50%;
+        width: 60%;
         flex-wrap: wrap;
 
         @include tablet {
@@ -28,14 +28,14 @@
 
         &__main {
             flex-grow: 1;
-            padding-top: 100%;
+            padding-top: 80%;
             position: relative;
 
             img {
                 position: absolute;
                 top: 0;
                 left: 50%;
-                height: 100%;
+                height: 80%;
                 transform: translateX(-50%);
             }
         }
@@ -113,27 +113,27 @@
                 }
             }
 
-            &__quantity {
-                @include flex(flex-start, flex-start);
+            // &__quantity {
+            //     @include flex(flex-start, flex-start);
 
-                &__btn {
-                    @include flex(center, center);
-                    width: 30px;
-                    height: 30px;
-                    border: 2px solid $txt-second-color;
-                    font-size: 1.5rem;
-                    cursor: pointer;
-                }
+            //     &__btn {
+            //         @include flex(center, center);
+            //         width: 30px;
+            //         height: 30px;
+            //         border: 2px solid $txt-second-color;
+            //         font-size: 1.5rem;
+            //         cursor: pointer;
+            //     }
 
-                &__input {
-                    @include flex(center, center);
-                    height: 30px;
-                    width: 90px;
-                    font-size: 1.5rem;
-                    border-top: 2px solid $txt-second-color;
-                    border-bottom: 2px solid $txt-second-color;
-                }
-            }
+            //     &__input {
+            //         @include flex(center, center);
+            //         height: 30px;
+            //         width: 90px;
+            //         font-size: 1.5rem;
+            //         border-top: 2px solid $txt-second-color;
+            //         border-bottom: 2px solid $txt-second-color;
+            //     }
+            // }
 
             button {
                 margin-right: 1rem;
@@ -145,7 +145,7 @@
 
 .product-description {
     width: 100%;
-    padding: 2rem 2rem 3rem;
+    padding: 1rem 2rem 3rem;
     height: 400px;
     overflow: hidden;
     position: relative;

@@ -1,16 +1,24 @@
-const product_01_image_01 = require("../images/products/sony.jpg").default;
-const product_01_image_02 = require("../images/products/sony2.jpg").default;
-const product_02_image_01 = require("../images/products/sony3.jpg").default;
-const product_02_image_02 = require("../images/products/sony4.jpg").default;
+const product_01_image_01 =
+  require("../images/products/product(01)_1.jpg").default;
+const product_01_image_02 =
+  require("../images/products/product(01)_2.jpg").default;
+const product_02_image_01 =
+  require("../images/products/product(02)_1.jpg").default;
+const product_02_image_02 =
+  require("../images/products/product(02)_2.jpg").default;
 
-const product_03_image_01 = require("../images/products/chen1.jpg").default;
-const product_03_image_02 = require("../images/products/chen2.jpg").default;
-
+const product_03_image_01 =
+  require("../images/products/product(03)_1.jpg").default;
+const product_03_image_02 =
+  require("../images/products/product(03)_2.jpg").default;
 const product_04_image_01 =
-  require("../images/products/product-04 (1).jpg").default;
+  require("../images/products/product(04)_1.png").default;
 const product_04_image_02 =
-  require("../images/products/product-04 (2).jpg").default;
-
+  require("../images/products/product(04)_2.png").default;
+const product_05_image_01 =
+  require("../images/products/product(05)_1.png").default;
+const product_05_image_02 =
+  require("../images/products/product(05)_2.png").default;
 const products = [
   {
     title: "Tai Nghe Sony Chính Hãng",
@@ -45,7 +53,28 @@ const products = [
     description:
       "Bộ tách trà Minh Long là một trong những dòng sản phẩm về gốm sứ được khách hàng ưa chuộng nhất hiện nay. Đa phần các bộ tách trà gốm sứ Minh Long đều mang phong cách cổ điển hòa lẫn với phong cách hiện đại rất phù hợp với thiết kế đương thời. Gốm sứ Hoàng gia chuyên cung cấp bộ ấm chén uống trà cao cấp với nhiều kiểu dáng, hoa văn phong phú bên cạnh đó chất lượng rất tốt so với giá thành. Bộ ấm trà giá rẻ gốm sứ Minh Long phù hợp sử dụng trong các hộ gia đình, nhà hàng, khách sạn cao cấp, ngoài ra còn có thể dùng làm quà tặng, uống trà, tặng phẩm. Để giúp bạn hiểu nhiều hơn về bộ ấm trà sứ trắng, bài viết sau của chúng tôi sẽ cung cấp đến bạn những thông tin cũng như những hình ảnh đẹp, chất lượng về bộ sản để bạn có thể tham khảo",
   },
-
+  {
+    title: "Bộ Ấm Chén Cổ1",
+    image01: product_04_image_01,
+    image02: product_04_image_02,
+    categorySlug: "ao-thun",
+    colors: ["white", "red", "orange", "yellow"],
+    slug: "am-chen-co-4",
+    size: ["m"],
+    description:
+      "Bộfasfdasdf tách trà Minh Long là một trong những dòng sản phẩm về gốm sứ được khách hàng ưa chuộng nhất hiện nay. Đa phần các bộ tách trà gốm sứ Minh Long đều mang phong cách cổ điển hòa lẫn với phong cách hiện đại rất phù hợp với thiết kế đương thời. Gốm sứ Hoàng gia chuyên cung cấp bộ ấm chén uống trà cao cấp với nhiều kiểu dáng, hoa văn phong phú bên cạnh đó chất lượng rất tốt so với giá thành. Bộ ấm trà giá rẻ gốm sứ Minh Long phù hợp sử dụng trong các hộ gia đình, nhà hàng, khách sạn cao cấp, ngoài ra còn có thể dùng làm quà tặng, uống trà, tặng phẩm. Để giúp bạn hiểu nhiều hơn về bộ ấm trà sứ trắng, bài viết sau của chúng tôi sẽ cung cấp đến bạn những thông tin cũng như những hình ảnh đẹp, chất lượng về bộ sản để bạn có thể tham khảoBộfasfdasdf tách trà Minh Long là một trong những dòng sản phẩm về gốm sứ được khách hàng ưa chuộng nhất hiện nay. Đa phần các bộ tách trà gốm sứ Minh Long đều mang phong cách cổ điển hòa lẫn với phong cách hiện đại rất phù hợp với thiết kế đương thời. Gốm sứ Hoàng gia chuyên cung cấp bộ ấm chén uống trà cao cấp với nhiều kiểu dáng, hoa văn phong phú bên cạnh đó chất lượng rất tốt so với giá thành. Bộ ấm trà giá rẻ gốm sứ Minh Long phù hợp sử dụng trong các hộ gia đình, nhà hàng, khách sạn cao cấp, ngoài ra còn có thể dùng làm quà tặng, uống trà, tặng phẩm. Để giúp bạn hiểu nhiều hơn về bộ ấm trà sứ trắng, bài viết sau của chúng tôi sẽ cung cấp đến bạn những thông tin cũng như những hình ảnh đẹp, chất lượng về bộ sản để bạn có thể tham khảo",
+  },
+  {
+    title: "Bộ Ấm Chén Cổ2",
+    image01: product_05_image_01,
+    image02: product_05_image_02,
+    categorySlug: "ao-thun",
+    colors: ["white", "red", "orange", "yellow"],
+    slug: "am-chen-co-5",
+    size: ["m"],
+    description:
+      "Bộ tách trà Minh Longfsadfasfasfasfas là một trong những dòng sản phẩm về gốm sứ được khách hàng ưa chuộng nhất hiện nay. Đa phần các bộ tách trà gốm sứ Minh Long đều mang phong cách cổ điển hòa lẫn với phong cách hiện đại rất phù hợp với thiết kế đương thời. Gốm sứ Hoàng gia chuyên cung cấp bộ ấm chén uống trà cao cấp với nhiều kiểu dáng, hoa văn phong phú bên cạnh đó chất lượng rất tốt so với giá thành. Bộ ấm trà giá rẻ gốm sứ Minh Long phù hợp sử dụng trong các hộ gia đình, nhà hàng, khách sạn cao cấp, ngoài ra còn có thể dùng làm quà tặng, uống trà, tặng phẩm. Để giúp bạn hiểu nhiều hơn về bộ ấm trà sứ trắng, bài viết sau của chúng tôi sẽ cung cấp đến bạn những thông tin cũng như những hình ảnh đẹp, chất lượng về bộ sản để bạn có thể tham khảo",
+  },
   // 18 products
 ];
 

@@ -7,7 +7,6 @@ import PolicyCard from "../components/PolicyCard";
 import Grid from "../components/Grid";
 import ProductCard from "../components/ProductCard";
 
-import heroSliderData from "../assets/fake-data/hero-slider";
 import productData from "../assets/fake-data/products";
 import Select from "react-select";
 
@@ -17,12 +16,7 @@ const Home = () => {
   return (
     <Helmet title="Trang chủ">
       {/* hero slider */}
-      <HeroSlider
-        data={heroSliderData}
-        control={true}
-        auto={false}
-        timeOut={5000}
-      />
+      <HeroSlider control={true} auto={false} timeOut={5000} />
       <Section>
         <SectionBody>
           <Grid col={2} mdCol={2} smCol={1} gap={20}>
