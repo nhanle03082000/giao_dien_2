@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom";
@@ -13,23 +13,7 @@ const ProductCard = (props) => {
           <img src={props.img02} alt="" />
         </div>
         <h3 className="product-card__name">{props.name}</h3>
-        {/* <div className="product-card__price">
-                    {numberWithCommas(props.price)}
-                    <span className="product-card__price__old">
-                        <del>{numberWithCommas(399000)}</del>
-                    </span>
-                </div> */}
       </Link>
-      {/* <div className="product-card__btn">
-        <Button
-          size="sm"
-          icon="bx bx-add-to-queue"
-          animate={true}
-          onClick={() => dispatch(set(props.slug))}
-        >
-          chọn quà
-        </Button>
-      </div> */}
     </div>
   );
 };

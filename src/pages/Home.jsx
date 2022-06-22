@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import Helmet from "../components/Helmet";
 import HeroSlider from "../components/HeroSlider";
@@ -9,10 +9,33 @@ import ProductCard from "../components/ProductCard";
 
 import productData from "../assets/fake-data/products";
 import Select from "react-select";
+import { ProductContext } from "../contexts/ProductContext";
+const options = [
+  { value: "AGI", label: "T. Hậu Giang" },
+  { value: "BLI", label: "T. Bạc Liêu" },
+  { value: "BTR", label: "T. Bến Tre" },
+  { value: "CMA", label: "T. Cà Mau" },
+  { value: "HGI", label: "T. Hậu Giang" },
+  { value: "KGI", label: "T. Kiên Giang" },
+  { value: "PQU", label: "T. Phú Quốc" },
+  { value: "STR", label: "T. Sóc Trăng" },
+  { value: "TGI", label: "T. Tiền Giang" },
+  { value: "TVI", label: "T. Trà Vinh" },
+  { value: "VLO", label: "T. Vĩnh Long" },
+  { value: "DTH", label: "T. Đồng Tháp" },
+  { value: "CTH", label: "T. Cần Thơ" },
+];
 
 const Home = () => {
   const productList = productData.getAllProducts();
-
+  const addProduct = useContext(ProductContext);
+  const [CateForm, setCateForm] = useState({
+    pISDN: "",
+    pMaChiNhanh: "",
+  });
+  const { pISDN, pMaChiNhanh } = CateForm;
+  const onChangeProductForm = (event) =>
+    setCateForm({ ...CateForm, pMaChiNhanh: event.target.value });
   return (
     <Helmet title="Trang chủ">
       {/* hero slider */}
@@ -33,20 +56,13 @@ const Home = () => {
         <SectionBody>
           <Grid col={7}>
             <Select
+              // value={pMaChiNhanh}
               className="basic-single"
               classNamePrefix="select"
-              // defaultValue={colourOptions[0]}
+              placeholder=" Thành Phố "
               isClearable={true}
-              name="color"
-              // options={colourOptions}
-            />
-            <Select
-              className="basic-single"
-              classNamePrefix="select"
-              // defaultValue={colourOptions[0]}
-              isClearable={true}
-              name="color"
-              // options={colourOptions}
+              options={options}
+              value={pMaChiNhanh}
             />
           </Grid>
         </SectionBody>
