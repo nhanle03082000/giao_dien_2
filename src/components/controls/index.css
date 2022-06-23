@@ -1,0 +1,29 @@
+.container {
+  /* background: #419be0; */
+}
+
+.slick-slide img {
+  margin: auto;
+}
+.img-style {
+  background: red;
+
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.img-cc {
+  background: red;
+  height: 100%;
+
+  width: 100%;
+}
+.container-select {
+  display: table;
+  padding-top: 50px;
+}
+.basic-single {
+  float: left;
+  padding: 20px;
+}
+
