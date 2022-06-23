@@ -100,6 +100,7 @@ const Home = () => {
                 img02={item.image02}
                 name={item.title}
                 slug={item.slug}
+                quantity={item.quantity}
               />
             ))}
           </Grid>

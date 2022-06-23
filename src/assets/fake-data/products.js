@@ -28,6 +28,7 @@ const products = [
     colors: ["white", "red", "orange"],
     slug: "tai-nghe-sony-1",
     size: ["s", "m", "l", "xl"],
+    quantity: 20,
     description:
       "Tai nghe được xem là một trong những thiết bị có tính năng nghe nhạc từ các thiết bị phát ra như máy tính bàn, laptop, điện thoại, ipad. Do đó, nó sở hữu riêng cho mình những chức năng riêng biệt và có hai mục đích sử dụng chính. Thứ nhất tai nghe dùng để nghe nhạc đã được tối ưu hóa cho việc nghe nhạc nên rất nhỏ gọn, được trang bị công nghệ để cân bằng các dải, với âm thoáng cũng như độ chi tiết cao nhất. Thứ hai tai nghe dùng cho xem phim hay chơi game thường là loại full size hay over ear, thường có mic để có thể chat thoại ở trong game, nếu như các loại tai nghe chính hãng thuộc dòng cao cấp sẽ có thêm driver để điều khiển riêng cho từng bên tai một. Do đó, các loại tai nghe đóng một vai trò hết sức quan trọng đối với con người, đây là một phụ kiện luôn đi kèm với người dùng mọi lúc, mọi nơi, mọi địa điểm khác nhau.",
   },
@@ -38,6 +39,7 @@ const products = [
     categorySlug: "ao-thun",
     colors: ["white", "red", "blue"],
     slug: "tai-nghe-sony-2",
+    quantity: 50,
     size: ["s", "m"],
     description:
       "Tai nghe được xem là một trong những thiết bị có tính năng nghe nhạc từ các thiết bị phát ra như máy tính bàn, laptop, điện thoại, ipad. Do đó, nó sở hữu riêng cho mình những chức năng riêng biệt và có hai mục đích sử dụng chính. Thứ nhất tai nghe dùng để nghe nhạc đã được tối ưu hóa cho việc nghe nhạc nên rất nhỏ gọn, được trang bị công nghệ để cân bằng các dải, với âm thoáng cũng như độ chi tiết cao nhất. Thứ hai tai nghe dùng cho xem phim hay chơi game thường là loại full size hay over ear, thường có mic để có thể chat thoại ở trong game, nếu như các loại tai nghe chính hãng thuộc dòng cao cấp sẽ có thêm driver để điều khiển riêng cho từng bên tai một. Do đó, các loại tai nghe đóng một vai trò hết sức quan trọng đối với con người, đây là một phụ kiện luôn đi kèm với người dùng mọi lúc, mọi nơi, mọi địa điểm khác nhau.",
@@ -50,6 +52,7 @@ const products = [
     colors: ["white", "red", "orange", "yellow"],
     slug: "am-chen-co-1",
     size: ["m"],
+    quantity: 20,
     description:
       "Bộ tách trà Minh Long là một trong những dòng sản phẩm về gốm sứ được khách hàng ưa chuộng nhất hiện nay. Đa phần các bộ tách trà gốm sứ Minh Long đều mang phong cách cổ điển hòa lẫn với phong cách hiện đại rất phù hợp với thiết kế đương thời. Gốm sứ Hoàng gia chuyên cung cấp bộ ấm chén uống trà cao cấp với nhiều kiểu dáng, hoa văn phong phú bên cạnh đó chất lượng rất tốt so với giá thành. Bộ ấm trà giá rẻ gốm sứ Minh Long phù hợp sử dụng trong các hộ gia đình, nhà hàng, khách sạn cao cấp, ngoài ra còn có thể dùng làm quà tặng, uống trà, tặng phẩm. Để giúp bạn hiểu nhiều hơn về bộ ấm trà sứ trắng, bài viết sau của chúng tôi sẽ cung cấp đến bạn những thông tin cũng như những hình ảnh đẹp, chất lượng về bộ sản để bạn có thể tham khảo",
   },
@@ -61,6 +64,7 @@ const products = [
     colors: ["white", "red", "orange", "yellow"],
     slug: "am-chen-co-4",
     size: ["m"],
+    quantity: 20,
     description:
       "Bộfasfdasdf tách trà Minh Long là một trong những dòng sản phẩm về gốm sứ được khách hàng ưa chuộng nhất hiện nay. Đa phần các bộ tách trà gốm sứ Minh Long đều mang phong cách cổ điển hòa lẫn với phong cách hiện đại rất phù hợp với thiết kế đương thời. Gốm sứ Hoàng gia chuyên cung cấp bộ ấm chén uống trà cao cấp với nhiều kiểu dáng, hoa văn phong phú bên cạnh đó chất lượng rất tốt so với giá thành. Bộ ấm trà giá rẻ gốm sứ Minh Long phù hợp sử dụng trong các hộ gia đình, nhà hàng, khách sạn cao cấp, ngoài ra còn có thể dùng làm quà tặng, uống trà, tặng phẩm. Để giúp bạn hiểu nhiều hơn về bộ ấm trà sứ trắng, bài viết sau của chúng tôi sẽ cung cấp đến bạn những thông tin cũng như những hình ảnh đẹp, chất lượng về bộ sản để bạn có thể tham khảoBộfasfdasdf tách trà Minh Long là một trong những dòng sản phẩm về gốm sứ được khách hàng ưa chuộng nhất hiện nay. Đa phần các bộ tách trà gốm sứ Minh Long đều mang phong cách cổ điển hòa lẫn với phong cách hiện đại rất phù hợp với thiết kế đương thời. Gốm sứ Hoàng gia chuyên cung cấp bộ ấm chén uống trà cao cấp với nhiều kiểu dáng, hoa văn phong phú bên cạnh đó chất lượng rất tốt so với giá thành. Bộ ấm trà giá rẻ gốm sứ Minh Long phù hợp sử dụng trong các hộ gia đình, nhà hàng, khách sạn cao cấp, ngoài ra còn có thể dùng làm quà tặng, uống trà, tặng phẩm. Để giúp bạn hiểu nhiều hơn về bộ ấm trà sứ trắng, bài viết sau của chúng tôi sẽ cung cấp đến bạn những thông tin cũng như những hình ảnh đẹp, chất lượng về bộ sản để bạn có thể tham khảo",
   },
@@ -71,6 +75,7 @@ const products = [
     categorySlug: "ao-thun",
     colors: ["white", "red", "orange", "yellow"],
     slug: "am-chen-co-5",
+    quantity: 20,
     size: ["m"],
     description:
       "Bộ tách trà Minh Longfsadfasfasfasfas là một trong những dòng sản phẩm về gốm sứ được khách hàng ưa chuộng nhất hiện nay. Đa phần các bộ tách trà gốm sứ Minh Long đều mang phong cách cổ điển hòa lẫn với phong cách hiện đại rất phù hợp với thiết kế đương thời. Gốm sứ Hoàng gia chuyên cung cấp bộ ấm chén uống trà cao cấp với nhiều kiểu dáng, hoa văn phong phú bên cạnh đó chất lượng rất tốt so với giá thành. Bộ ấm trà giá rẻ gốm sứ Minh Long phù hợp sử dụng trong các hộ gia đình, nhà hàng, khách sạn cao cấp, ngoài ra còn có thể dùng làm quà tặng, uống trà, tặng phẩm. Để giúp bạn hiểu nhiều hơn về bộ ấm trà sứ trắng, bài viết sau của chúng tôi sẽ cung cấp đến bạn những thông tin cũng như những hình ảnh đẹp, chất lượng về bộ sản để bạn có thể tham khảo",
