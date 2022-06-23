@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-
+import React, { useContext, useState, useEffect } from "react";
 import Helmet from "../components/Helmet";
 import HeroSlider from "../components/HeroSlider";
 import Section, { SectionTitle, SectionBody } from "../components/Section";
@@ -11,7 +10,7 @@ import productData from "../assets/fake-data/products";
 import Select from "react-select";
 import { ProductContext } from "../contexts/ProductContext";
 const options = [
-  { value: "AGI", label: "T. Hậu Giang" },
+  { value: "AGI", label: "T. An Giang" },
   { value: "BLI", label: "T. Bạc Liêu" },
   { value: "BTR", label: "T. Bến Tre" },
   { value: "CMA", label: "T. Cà Mau" },
@@ -28,14 +27,40 @@ const options = [
 
 const Home = () => {
   const productList = productData.getAllProducts();
-  const addProduct = useContext(ProductContext);
-  const [CateForm, setCateForm] = useState({
+
+  const { getDataProducts } = useContext(ProductContext);
+  console.log("getDataProductsByPisdn", getDataProducts);
+  const [ProductForm, setProductForm] = useState({
     pISDN: "",
     pMaChiNhanh: "",
   });
-  const { pISDN, pMaChiNhanh } = CateForm;
-  const onChangeProductForm = (event) =>
-    setCateForm({ ...CateForm, pMaChiNhanh: event.target.value });
+  const { pISDN, pMaChiNhanh } = ProductForm;
+  // console.log("ProductForm", ProductForm);
+
+  const onChange = async (data) => {
+    // console.log("on change = " + JSON.stringify(data));
+
+    // console.log("data selection", data);
+    setProductForm({
+      pISDN: "911656561",
+      pMaChiNhanh: data.value,
+    });
+  };
+  // console.log("get value", ProductForm);
+  useEffect(() => {
+    async function getProduct() {
+      try {
+        const newProduct = await getDataProducts(ProductForm);
+        console.log("new-data", newProduct);
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+      return true;
+    }
+    console.log("test render");
+    getProduct();
+  }, [pMaChiNhanh, pISDN]);
   return (
     <Helmet title="Trang chủ">
       {/* hero slider */}
@@ -60,9 +85,8 @@ const Home = () => {
               className="basic-single"
               classNamePrefix="select"
               placeholder=" Thành Phố "
-              isClearable={true}
               options={options}
-              value={pMaChiNhanh}
+              onChange={onChange}
             />
           </Grid>
         </SectionBody>

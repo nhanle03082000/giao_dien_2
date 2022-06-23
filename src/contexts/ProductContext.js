@@ -9,19 +9,28 @@ const ProductContextProvider = ({ children }) => {
     products: [],
     productsLoading: true,
   });
-  const getProductsByPisdn = async (productForm) => {
+  const getDataProducts = async (ProductForm) => {
     try {
+      console.log("data ProductForm", ProductForm);
       const response = await axios.post(
         `${apiUrl}/khoqua/tonkho/thuebao?a=select`,
-        productForm
+        {
+          jsonData: ProductForm,
+        }
       );
-      console.log("data", response.data);
+      console.log("trog na", response.data);
+      if (response.data)
+        dispatch({ type: "ADD_MST_SDT", payload: response.data });
+      return response.data;
     } catch (error) {
       if (error.response.data) return error.response.data;
       else return { success: false, message: "Server Error" };
     }
   };
-  const ProductContextData = { productState, getProductsByPisdn };
+  const ProductContextData = {
+    productState,
+    getDataProducts,
+  };
   return (
     <ProductContext.Provider value={ProductContextData}>
       {children}
