@@ -9,6 +9,8 @@ import ProductCard from "../components/ProductCard";
 import productData from "../assets/fake-data/products";
 import Select from "react-select";
 import { ProductContext } from "../contexts/ProductContext";
+import { createBrowserHistory } from "history";
+
 const options = [
   { value: "AGI", label: "T. An Giang" },
   { value: "BLI", label: "T. Bạc Liêu" },
@@ -24,8 +26,9 @@ const options = [
   { value: "DTH", label: "T. Đồng Tháp" },
   { value: "CTH", label: "T. Cần Thơ" },
 ];
+const history = createBrowserHistory();
 
-const Home = () => {
+const Home = ({ location }) => {
   const productList = productData.getAllProducts();
 
   const { getDataProducts } = useContext(ProductContext);
@@ -47,6 +50,12 @@ const Home = () => {
     });
   };
   // console.log("get value", ProductForm);
+  useEffect(() => {
+    // get all the URLParams
+    const params = new URLSearchParams(location.search);
+    const q = params.get("pISDN");
+    console.log(" số điện thoại người dùng", q);
+  }, []);
   useEffect(() => {
     async function getProduct() {
       try {
