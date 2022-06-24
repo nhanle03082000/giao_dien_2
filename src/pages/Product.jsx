@@ -9,6 +9,7 @@ import productData from "../assets/fake-data/products";
 const Product = (props) => {
   const product = productData.getProductBySlug(props.match.params.slug);
   // đay   là tragn khi người dùng nhắn vào hình ảnh sản phẩm
+  console.log("productview", product);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);

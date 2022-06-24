@@ -13,7 +13,7 @@ const ProductCard = (props) => {
           <img src={props.img02} alt="" />
         </div>
         <h3 className="product-card__name">{props.name}</h3>
-        <span>số lượng: {props.quantity}</span>
+        <span>{props.quantity}</span>
       </Link>
     </div>
   );

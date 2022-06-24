@@ -5,16 +5,10 @@ import Button from "./Button";
 import * as Service from "../services/Service";
 import FormInfor from "../components/FormInfor";
 import PopupForm from "../components/PopupForm";
-// const headCells = [
-//   { id: "fullName", label: "Employee Name" },
-//   { id: "email", label: "Email Address (Personal)" },
-//   { id: "mobile", label: "Mobile Number" },
-//   { id: "department", label: "Department" },
-//   { id: "actions", label: "Actions", disableSorting: true },
-// ];
+
 const ProductView = (props) => {
   let product = props.product;
-
+  console.log("product view", product);
   if (product === undefined)
     product = {
       title: "",
@@ -29,12 +23,7 @@ const ProductView = (props) => {
   const [descriptionExpand, setDescriptionExpand] = useState(false);
 
   const [recordForEdit, setRecordForEdit] = useState(null);
-  // const [records, setRecords] = useState(Service.getAllEmployees());
-  // const [filterFn, setFilterFn] = useState({
-  //   fn: (items) => {
-  //     return items;
-  //   },
-  // });
+
   const [openPopup, setOpenPopup] = useState(false);
   const addOrEdit = (employee, resetForm) => {
     if (employee.id === 0) Service.insertEmployee(employee);
@@ -42,14 +31,7 @@ const ProductView = (props) => {
     resetForm();
     setRecordForEdit(null);
     setOpenPopup(false);
-    // setRecords(Service.getAllEmployees());
   };
-
-  // const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
-  //   useTable(records, headCells, filterFn);
-  // useEffect(() => {
-  //   setPreviewImg(product.image01);
-  // }, [product]);
 
   const goToCart = () => {
     setOpenPopup(true);

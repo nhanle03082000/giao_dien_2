@@ -10,6 +10,10 @@ import productData from "../assets/fake-data/products";
 import Select from "react-select";
 import { ProductContext } from "../contexts/ProductContext";
 import { createBrowserHistory } from "history";
+import Banner from "../components/Banner";
+import banner1 from "../assets/images/banner1.png";
+import banner2 from "../assets/images/banner2.png";
+import banner3 from "../assets/images/banner3_1.png";
 
 const options = [
   { value: "AGI", label: "T. An Giang" },
@@ -31,45 +35,42 @@ const history = createBrowserHistory();
 const Home = ({ location }) => {
   const productList = productData.getAllProducts();
 
-  const { getDataProducts } = useContext(ProductContext);
-  console.log("getDataProductsByPisdn", getDataProducts);
+  const {
+    productState: { products },
+    getDataProducts,
+  } = useContext(ProductContext);
   const [ProductForm, setProductForm] = useState({
     pISDN: "",
     pMaChiNhanh: "",
   });
+  const [sdt, setSdt] = useState("");
+  const [dataProduct, setDataProduct] = useState("");
+  console.log("dataProduct", products);
   const { pISDN, pMaChiNhanh } = ProductForm;
-  // console.log("ProductForm", ProductForm);
-
-  const onChange = async (data) => {
-    // console.log("on change = " + JSON.stringify(data));
-
-    // console.log("data selection", data);
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get("pISDN");
+    setSdt(q);
+  }, []);
+  const onChange = (data) => {
     setProductForm({
-      pISDN: "911656561",
+      pISDN: sdt,
       pMaChiNhanh: data.value,
     });
   };
-  // console.log("get value", ProductForm);
-  useEffect(() => {
-    // get all the URLParams
-    const params = new URLSearchParams(location.search);
-    const q = params.get("pISDN");
-    console.log(" số điện thoại người dùng", q);
-  }, []);
   useEffect(() => {
     async function getProduct() {
       try {
         const newProduct = await getDataProducts(ProductForm);
         console.log("new-data", newProduct);
+        setDataProduct(newProduct);
       } catch (error) {
-        console.log(error);
         return false;
       }
       return true;
     }
-    console.log("test render");
     getProduct();
-  }, [pMaChiNhanh, pISDN]);
+  }, [pMaChiNhanh]);
   return (
     <Helmet title="Trang chủ">
       {/* hero slider */}
@@ -82,6 +83,15 @@ const Home = ({ location }) => {
               name="Chào mừng quý khách đến với hệ thống quà tặng của mobifon"
               description="chúc mừng quý khách nhiều niềm vui trong cuộc sống"
             />
+          </Grid>
+        </SectionBody>
+      </Section>
+      <Section>
+        <SectionBody>
+          <Grid col={3} mdCol={2} smCol={1} gap={20}>
+            <Banner img={banner1} />
+            <Banner img={banner2} />
+            <Banner img={banner3} />
           </Grid>
         </SectionBody>
       </Section>
@@ -109,7 +119,6 @@ const Home = ({ location }) => {
                 img02={item.image02}
                 name={item.title}
                 slug={item.slug}
-                quantity={item.quantity}
               />
             ))}
           </Grid>

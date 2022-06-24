@@ -6,7 +6,7 @@ import { productReducer } from "../reducers/productReducer";
 export const ProductContext = createContext();
 const ProductContextProvider = ({ children }) => {
   const [productState, dispatch] = useReducer(productReducer, {
-    products: [],
+    products: "",
     productsLoading: true,
   });
   const getDataProducts = async (ProductForm) => {
@@ -18,10 +18,10 @@ const ProductContextProvider = ({ children }) => {
           jsonData: ProductForm,
         }
       );
-      console.log("trog na", response.data);
+      console.log("trog na", response.data.data);
       if (response.data)
-        dispatch({ type: "ADD_MST_SDT", payload: response.data });
-      return response.data;
+        dispatch({ type: "ADD_MST_SDT", payload: response.data.data });
+      return response.data.data;
     } catch (error) {
       if (error.response.data) return error.response.data;
       else return { success: false, message: "Server Error" };

@@ -18,7 +18,7 @@ export const productReducer = (state, action) => {
     case "ADD_MST_SDT":
       return {
         ...state,
-        categories: [...state.products, payload],
+        products: action.payload,
         productsLoading: false,
       };
     default:
