@@ -19,6 +19,7 @@ export const productReducer = (state, action) => {
       return {
         ...state,
         products: action.payload,
+        // products: [...state.products, payload],
         productsLoading: false,
       };
     default:

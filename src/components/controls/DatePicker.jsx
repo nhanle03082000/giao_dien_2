@@ -22,7 +22,7 @@ export default function DatePicker(props) {
         variant="inline"
         inputVariant="outlined"
         label={label}
-        format="MMM/dd/yyyy"
+        format="dd/mm/yyyy"
         name={name}
         value={value}
         onChange={(date) => onChange(convertToDefEventPara(name, date))}

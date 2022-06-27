@@ -74,21 +74,13 @@ const Home = ({ location }) => {
   return (
     <Helmet title="Trang chủ">
       {/* hero slider */}
-      <HeroSlider control={true} auto={false} timeOut={5000} />
       <Section>
-        <SectionBody>
-          <Grid col={2} mdCol={2} smCol={1} gap={20}>
-            <PolicyCard name="jjj" description="{item.description}" />
-            <PolicyCard
-              name="Chào mừng quý khách đến với hệ thống quà tặng của mobifon"
-              description="chúc mừng quý khách nhiều niềm vui trong cuộc sống"
-            />
-          </Grid>
-        </SectionBody>
+        <HeroSlider control={true} auto={false} timeOut={5000} />
       </Section>
+
       <Section>
         <SectionBody>
-          <Grid col={3} mdCol={2} smCol={1} gap={20}>
+          <Grid col={3} mdCol={2} smCol={1} gap={0}>
             <Banner img={banner1} />
             <Banner img={banner2} />
             <Banner img={banner3} />
@@ -97,6 +89,17 @@ const Home = ({ location }) => {
       </Section>
       <Section>
         <SectionTitle>quà tặng</SectionTitle>
+        <Section>
+          <SectionBody>
+            <Grid col={2} mdCol={2} smCol={1} gap={20}>
+              <PolicyCard name="jjj" description="{item.description}" />
+              <PolicyCard
+                name="Chào mừng quý khách đến với hệ thống quà tặng của mobifon"
+                description="chúc mừng quý khách nhiều niềm vui trong cuộc sống"
+              />
+            </Grid>
+          </SectionBody>
+        </Section>
         <SectionBody>
           <Grid col={7}>
             <Select

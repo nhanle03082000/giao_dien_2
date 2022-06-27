@@ -26,8 +26,8 @@ const ProductView = (props) => {
 
   const [openPopup, setOpenPopup] = useState(false);
   const addOrEdit = (employee, resetForm) => {
-    if (employee.id === 0) Service.insertEmployee(employee);
-    else Service.updateEmployee(employee);
+    // if (employee.id === 0) Service.insertEmployee(employee);
+    // else Service.updateEmployee(employee);
     resetForm();
     setRecordForEdit(null);
     setOpenPopup(false);
