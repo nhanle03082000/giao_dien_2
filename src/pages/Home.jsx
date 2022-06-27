@@ -58,6 +58,7 @@ const Home = ({ location }) => {
       pMaChiNhanh: data.value,
     });
   };
+  // nhanle test
   useEffect(() => {
     async function getProduct() {
       try {
