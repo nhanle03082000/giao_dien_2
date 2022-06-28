@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import Button from "./Button";
 
 import { Link } from "react-router-dom";
 
@@ -15,6 +16,11 @@ const ProductCard = (props) => {
         <h3 className="product-card__name">{props.name}</h3>
         <span>{props.quantity}</span>
       </Link>
+      <div className="product-card__btn">
+        <Button size="sm" icon="bx bx-add-to-queue" animate={true}>
+          Giữ Quà
+        </Button>
+      </div>
     </div>
   );
 };

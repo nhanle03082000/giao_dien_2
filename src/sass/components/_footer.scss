@@ -6,12 +6,16 @@
     padding: 70px 0;
     box-shadow: $box-shadow;
     font-size: 1.1rem;
-
+.container {
+        height: 100%;
+        background-color: white;
+    }
     &__logo {
         height: 38px;
     }
 
     &__about {
+        
         p {
             margin-bottom: 2rem;
         }
@@ -24,6 +28,7 @@
     }
 
     &__content {
+        
         p {
             margin-bottom: 1.25rem;
         }

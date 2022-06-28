@@ -13,7 +13,7 @@ import { createBrowserHistory } from "history";
 import Banner from "../components/Banner";
 import banner1 from "../assets/images/banner1.png";
 import banner2 from "../assets/images/banner2.png";
-import banner3 from "../assets/images/banner3_1.png";
+import banner3 from "../assets/images/banner3_verson3.png";
 
 const options = [
   { value: "AGI", label: "T. An Giang" },
@@ -81,14 +81,18 @@ const Home = ({ location }) => {
 
       <Section>
         <SectionBody>
-          <Grid col={3} mdCol={2} smCol={1} gap={0}>
-            <Banner img={banner1} />
-            <Banner img={banner2} />
-            <Banner img={banner3} />
-          </Grid>
+          <SectionBody>
+            <Grid col={3} mdCol={2} smCol={3} gap={20}>
+              <Banner img={banner1} />
+              <Banner img={banner2} />
+              <div className="img-main">
+                <Banner img={banner3} />
+              </div>
+            </Grid>
+          </SectionBody>
         </SectionBody>
       </Section>
-      <Section>
+      {/* <Section>
         <SectionTitle>quà tặng</SectionTitle>
         <Section>
           <SectionBody>
@@ -127,58 +131,7 @@ const Home = ({ location }) => {
             ))}
           </Grid>
         </SectionBody>
-      </Section>
-      {/* end best selling section */}
-
-      {/* new arrival section */}
-      {/* <Section>
-        <SectionTitle>sản phẩm mới</SectionTitle>
-        <SectionBody>
-          <Grid col={4} mdCol={2} smCol={1} gap={20}>
-            {productData.getProducts(8).map((item, index) => (
-              <ProductCard
-                key={index}
-                img01={item.image01}
-                img02={item.image02}
-                name={item.title}
-                price={Number(item.price)}
-                slug={item.slug}
-              />
-            ))}
-          </Grid>
-        </SectionBody>
       </Section> */}
-      {/* end new arrival section */}
-
-      {/* banner */}
-      {/* <Section>
-        <SectionBody>
-          <Link to="/catalog">
-            <img src={banner} alt="" />
-          </Link>
-        </SectionBody>
-      </Section> */}
-      {/* end banner */}
-
-      {/* popular product section */}
-      {/* <Section>
-        <SectionTitle>phổ biến</SectionTitle>
-        <SectionBody>
-          <Grid col={4} mdCol={2} smCol={1} gap={20}>
-            {productData.getProducts(12).map((item, index) => (
-              <ProductCard
-                key={index}
-                img01={item.image01}
-                img02={item.image02}
-                name={item.title}
-                price={Number(item.price)}
-                slug={item.slug}
-              />
-            ))}
-          </Grid>
-        </SectionBody>
-      </Section> */}
-      {/* end popular product section */}
     </Helmet>
   );
 };

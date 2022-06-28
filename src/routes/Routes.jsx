@@ -15,7 +15,7 @@ const Routes = () => {
         <Switch>
           <ProductContextProvider>
             <Route path="/" exact component={Home} />
-            <Route path="/product/:slug" component={Product} />
+            <Route path="/product/" component={Product} />
           </ProductContextProvider>
         </Switch>
       </Route>

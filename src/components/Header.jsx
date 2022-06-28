@@ -84,9 +84,10 @@
 
 // export default Header;
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-
+import FormInfor from "./FormInfor";
+import AuthPopup from "./AuthPopup";
 import logo from "../assets/images/logo-small.png";
 
 const mainNav = [
@@ -96,17 +97,25 @@ const mainNav = [
   },
 
   // {
-  //   display: "Liên hệ",
-  //   path: "/contact",
+  //   display: "Đăng Nhập",
+  //   path: "/product",
   // },
 ];
 
 const Header = () => {
   const { pathname } = useLocation();
   const activeNav = mainNav.findIndex((e) => e.path === pathname);
+  const [recordForEdit, setRecordForEdit] = useState(null);
 
   const headerRef = useRef(null);
-
+  const [openPopup, setOpenPopup] = useState(false);
+  const addOrEdit = (employee, resetForm) => {
+    // if (employee.id === 0) Service.insertEmployee(employee);
+    // else Service.updateEmployee(employee);
+    resetForm();
+    setRecordForEdit(null);
+    setOpenPopup(false);
+  };
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (
@@ -145,7 +154,6 @@ const Header = () => {
             </div>
             {mainNav.map((item, index) => (
               <div
-                key={index}
                 className={`header__menu__item header__menu__left__item ${
                   index === activeNav ? "active" : ""
                 }`}
@@ -156,6 +164,16 @@ const Header = () => {
                 </Link>
               </div>
             ))}
+            <div className="header__menu__item header__menu__left__item">
+              <span onClick={() => setOpenPopup(true)}>Đăng Nhập</span>
+            </div>
+            <FormInfor
+              title="Vui Lòng Điền Thông Tin"
+              openPopup={openPopup}
+              setOpenPopup={setOpenPopup}
+            >
+              <AuthPopup recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
+            </FormInfor>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Grid } from "@material-ui/core";
-import Controls from "../components/controls/Controls";
+import Controls from "./controls/Controls";
 import { useForm, Form } from "./controls/useForm";
 import * as Service from "../services/Service";
 
@@ -12,7 +12,7 @@ const genderItems = [
 
 const initialFValues = {
   id: 0,
-  fullName: "",
+  maquatang: "",
   email: "",
   mobile: "",
   city: "",
@@ -22,13 +22,13 @@ const initialFValues = {
   isPermanent: false,
 };
 
-export default function PopupForm(props) {
+export default function AuthPopup(props) {
   const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-    if ("fullName" in fieldValues)
-      temp.fullName = fieldValues.fullName ? "" : "Tên Không Được Để Trống ";
+    if ("maquatang" in fieldValues)
+      temp.maquatang = fieldValues.maquatang ? "" : "Tên Không Được Để Trống ";
     if ("email" in fieldValues)
       temp.email = /$^|.+@.+..+/.test(fieldValues.email)
         ? ""
@@ -55,7 +55,6 @@ export default function PopupForm(props) {
     if (validate()) {
       addOrEdit(values, resetForm);
     }
-    console.log("hello nhanle");
   };
 
   useEffect(() => {
@@ -67,57 +66,27 @@ export default function PopupForm(props) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Grid container>
-        <Grid item xs={6}>
-          <Controls.Input
-            name="fullName"
-            label="Tên Khách Hàng"
-            value={values.fullName}
-            onChange={handleInputChange}
-            error={errors.fullName}
-          />
-          <Controls.Input
-            label="Email"
-            name="email"
-            value={values.email}
-            onChange={handleInputChange}
-            error={errors.email}
-          />
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+      >
+        <Grid>
           <Controls.Input
             label="Số Điện Thoại"
-            name="mobile"
+            name="email"
             value={values.mobile}
             onChange={handleInputChange}
             error={errors.mobile}
           />
           <Controls.Input
-            label="Địa Chỉ "
-            name="city"
-            value={values.city}
+            name="maquatang"
+            label="Mã Quà Tặng"
+            value={values.maquatang}
             onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Controls.RadioGroup
-            name="gender"
-            label="Gender"
-            value={values.gender}
-            onChange={handleInputChange}
-            items={genderItems}
-          />
-          <Controls.Select
-            name="departmentId"
-            label="Số Lượng "
-            value={values.departmentId}
-            onChange={handleInputChange}
-            options={Service.getDepartmentCollection()}
-            error={errors.departmentId}
-          />
-          <Controls.DatePicker
-            name="hireDate"
-            label="Ngày Nhận Quà"
-            value={values.hireDate}
-            onChange={handleInputChange}
+            error={errors.maquatang}
           />
           {/* <Controls.Checkbox
             name="isPermanent"

@@ -22,7 +22,7 @@
 
     .container {
         height: 100%;
-        background-color: white;
+    background-color: white;
     }
 
     &.shrink {
@@ -36,18 +36,19 @@
     }
 
     &__logo {
-        @include flex(center, center);
+        @include flex(center, space-between);
         position: absolute;
         inset: 0;
         pointer-events: none;
+        margin-left: 30px;
 
         img {
-            height: 48px;
+            height: 35px;
         }
     }
 
     &__menu {
-        @include flex(center, space-between);
+        @include flex(center, flex-end);
         height: 100%;
         font-size: 1.5rem;
 
