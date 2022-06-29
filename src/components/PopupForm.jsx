@@ -98,13 +98,6 @@ export default function PopupForm(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <Controls.RadioGroup
-            name="gender"
-            label="Gender"
-            value={values.gender}
-            onChange={handleInputChange}
-            items={genderItems}
-          />
           <Controls.Select
             name="departmentId"
             label="Số Lượng "

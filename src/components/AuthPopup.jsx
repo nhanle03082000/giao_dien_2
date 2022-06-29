@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import Controls from "./controls/Controls";
 import { useForm, Form } from "./controls/useForm";
 import * as Service from "../services/Service";
-
+import "./controls/index.css";
 const genderItems = [
   { id: "male", title: "Male" },
   { id: "female", title: "Female" },
@@ -95,7 +95,7 @@ export default function AuthPopup(props) {
             onChange={handleInputChange}
           /> */}
 
-          <div>
+          <div className="control-button">
             <Controls.Button type="submit" text="Xác Nhận" />
             <Controls.Button
               text="Đặt Lại"

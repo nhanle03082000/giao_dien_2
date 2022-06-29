@@ -11,7 +11,7 @@ const Grid = (props) => {
   const smCol = props.smCol ? `grid-col-sm-${props.smCol}` : "";
 
   return (
-    <div className={`grid ${col} ${mdCol} ${smCol}`} style={style}>
+    <div className={`grid ${col} ${mdCol} ${smCol}`} style={props.style}>
       {props.children}
     </div>
   );
@@ -22,6 +22,7 @@ Grid.propTypes = {
   mdCol: PropTypes.number,
   smCol: PropTypes.number,
   gap: PropTypes.number,
+  style: PropTypes.object,
 };
 
 export default Grid;

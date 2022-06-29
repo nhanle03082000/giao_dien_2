@@ -3,9 +3,28 @@ import PropTypes from "prop-types";
 import Button from "./Button";
 
 import { Link } from "react-router-dom";
+import FormInfor from "./FormInfor";
+import PopupForm from "./PopupForm";
 
-// trang này là tragn sản phảm chính khi người dùng nhần vào sản phảm cho người dùng có thể
 const ProductCard = (props) => {
+  const [descriptionExpand, setDescriptionExpand] = useState(false);
+
+  const [recordForEdit, setRecordForEdit] = useState(null);
+
+  const [openPopup, setOpenPopup] = useState(false);
+  const addOrEdit = (employee, resetForm) => {
+    // if (employee.id === 0) Service.insertEmployee(employee);
+    // else Service.updateEmployee(employee);
+    resetForm();
+    setRecordForEdit(null);
+    setOpenPopup(false);
+  };
+
+  const goToCart = () => {
+    setOpenPopup(true);
+    setRecordForEdit(null);
+  };
+
   return (
     <div className="product-card">
       <Link to={`/product/${props.slug}`}>
@@ -17,10 +36,22 @@ const ProductCard = (props) => {
         <span>{props.quantity}</span>
       </Link>
       <div className="product-card__btn">
-        <Button size="sm" icon="bx bx-add-to-queue" animate={true}>
+        <Button
+          size="sm"
+          icon="bx bx-add-to-queue"
+          animate={true}
+          onClick={() => setOpenPopup(true)}
+        >
           Giữ Quà
         </Button>
       </div>
+      <FormInfor
+        title="Xác Nhận Thông Tin"
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+      >
+        <PopupForm recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
+      </FormInfor>
     </div>
   );
 };

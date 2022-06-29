@@ -24,4 +24,35 @@
   float: left;
   padding: 20px;
 }
+.select-main{
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+.basic-single  {
+  padding: 8px;
+}
+.css-b62m3t-container {
+  width: 100%;
+}
 
+.css-6j8wv5-Input{
+  min-width: 82px;
+}
+.makeStyles-root-4 .MuiFormControl-root{
+    width: 94% !important;
+    margin: 8px;
+}
+.control-button{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+  }
+.MuiTypography-h6 {
+      line-height: 2.6 !important;
+  }
+.grid .grid-col-3 .grid-col-md-2 .grid-col-sm-1{
+    border-top: 2px solid #e5e3e3;
+    padding-top: 20px;
+}

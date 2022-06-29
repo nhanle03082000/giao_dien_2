@@ -82,13 +82,23 @@ const Home = ({ location }) => {
       <Section>
         <SectionBody>
           <SectionBody>
-            <Grid col={3} mdCol={2} smCol={3} gap={20}>
+            <Grid
+              col={3}
+              mdCol={2}
+              smCol={1}
+              gap={20}
+              style={{
+                paddingTop: "35px",
+                borderTop: "3px solid #eaeaea",
+              }}
+            >
               <Banner img={banner1} />
               <Banner img={banner2} />
-              <div className="img-main">
-                <Banner img={banner3} />
-              </div>
+              <Banner img={banner3} />
             </Grid>
+            {/* <div className="img-main">
+                <Banner img={banner3} />
+              </div> */}
           </SectionBody>
         </SectionBody>
       </Section>

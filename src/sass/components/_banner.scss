@@ -39,13 +39,44 @@
 //     }}
 
 
+// .banner {
+//     @include flex(center, center);
+//     width: 80%;
+//     padding-left: 0;
+//     box-shadow: $box-shadow;
+//     transition: transform 0.5s ease;
+//     background-color: #fff;
+//     margin: 0 auto;
+//     &:hover {
+//         transform: translateY(-20px);
+//         box-shadow: 5px 10px 5px 7px #888888;
+//     }
+
+
+
+
+                       
+// }
+
+//   @include tablet {
+//       .img-main {
+//         width: 100%;        
+//         align-items: center;
+//         left:5000px;
+//       }
+//   }
+//    @include mobile {
+//        .img-main {
+//            width: 100%;
+//        }
+//    }
+
 .banner {
     @include flex(center, center);
-    width: 80%;
+    width: 75%;
     padding-left: 0;
     box-shadow: $box-shadow;
     transition: transform 0.5s ease;
-    background-color: #fff;
     margin: 0 auto;
     &:hover {
         transform: translateY(-20px);
@@ -55,18 +86,9 @@
 
 
 
-                       
-}
+    &__image-baner {
+        height: 80%;
+        width: 80%;
+    }
 
-  @include tablet {
-      .img-main {
-        width: 100%;        
-        align-items: center;
-        left:5000px;
-      }
-  }
-   @include mobile {
-       .img-main {
-           width: 100%;
-       }
-   }
+}

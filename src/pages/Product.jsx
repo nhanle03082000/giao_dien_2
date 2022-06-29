@@ -10,21 +10,21 @@ import Section, { SectionTitle, SectionBody } from "../components/Section";
 import Grid from "../components/Grid";
 import Select from "react-select";
 import { ProductContext } from "../contexts/ProductContext";
-
+import "../components/controls/index.css";
 const options = [
-  { value: "AGI", label: "T. An Giang" },
-  { value: "BLI", label: "T. Bạc Liêu" },
-  { value: "BTR", label: "T. Bến Tre" },
-  { value: "CMA", label: "T. Cà Mau" },
-  { value: "HGI", label: "T. Hậu Giang" },
-  { value: "KGI", label: "T. Kiên Giang" },
-  { value: "PQU", label: "T. Phú Quốc" },
-  { value: "STR", label: "T. Sóc Trăng" },
-  { value: "TGI", label: "T. Tiền Giang" },
-  { value: "TVI", label: "T. Trà Vinh" },
-  { value: "VLO", label: "T. Vĩnh Long" },
-  { value: "DTH", label: "T. Đồng Tháp" },
-  { value: "CTH", label: "T. Cần Thơ" },
+  { value: "AGI", label: "An Giang" },
+  { value: "BLI", label: "Bạc Liêu" },
+  { value: "BTR", label: "Bến Tre" },
+  { value: "CMA", label: "Cà Mau" },
+  { value: "HGI", label: "Hậu Giang" },
+  { value: "KGI", label: "Kiên Giang" },
+  { value: "PQU", label: "Phú Quốc" },
+  { value: "STR", label: "Sóc Trăng" },
+  { value: "TGI", label: "Tiền Giang" },
+  { value: "TVI", label: "Trà Vinh" },
+  { value: "VLO", label: "Vĩnh Long" },
+  { value: "DTH", label: "Đồng Tháp" },
+  { value: "CTH", label: "Cần Thơ" },
 ];
 const Product = ({ location }) => {
   const productList = productData.getAllProducts();
@@ -41,16 +41,19 @@ const Product = ({ location }) => {
   const [dataProduct, setDataProduct] = useState("");
   console.log("dataProduct", products);
   const { pISDN, pMaChiNhanh } = ProductForm;
+  const [isClearable, setIsClearable] = useState(true);
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const q = params.get("pISDN");
     setSdt(q);
   }, []);
   const onChange = (data) => {
-    setProductForm({
-      pISDN: sdt,
-      pMaChiNhanh: data.value,
-    });
+    console.log("nhanle data value", data);
+    if (data)
+      setProductForm({
+        pISDN: sdt,
+        pMaChiNhanh: data.value,
+      });
   };
   // nhanle test
   useEffect(() => {
@@ -76,7 +79,7 @@ const Product = ({ location }) => {
       </Section> */}
 
       <Section>
-        <SectionTitle>quà tặng</SectionTitle>
+        <SectionTitle>Thông Tin Khách Hàng</SectionTitle>
         <Section>
           <SectionBody>
             <Grid col={2} mdCol={2} smCol={1} gap={20}>
@@ -89,15 +92,41 @@ const Product = ({ location }) => {
           </SectionBody>
         </Section>
         <SectionBody>
-          <Grid col={7}>
-            <Select
-              // value={pMaChiNhanh}
-              className="basic-single"
-              classNamePrefix="select"
-              placeholder=" Thành Phố "
-              options={options}
-              onChange={onChange}
-            />
+          <SectionTitle>Quà Tặng</SectionTitle>
+          <Grid col={0}>
+            <div className="select-main">
+              <div className="select-child">
+                <Select
+                  // value={pMaChiNhanh}
+                  className="basic-single"
+                  classNamePrefix="select"
+                  placeholder="Thành Phố"
+                  options={options}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="select-child">
+                <Select
+                  // value={pMaChiNhanh}
+                  className="basic-single"
+                  classNamePrefix="select"
+                  placeholder="Quận"
+                  options={options}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="select-child">
+                <Select
+                  // value={pMaChiNhanh}
+                  className="basic-single"
+                  classNamePrefix="select"
+                  placeholder="Cửa Hàng"
+                  options={options}
+                  onChange={onChange}
+                  // isClearable={isClearable}
+                />
+              </div>
+            </div>
           </Grid>
         </SectionBody>
 

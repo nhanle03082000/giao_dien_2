@@ -135,7 +135,10 @@ const Header = () => {
   const menuLeft = useRef(null);
 
   const menuToggle = () => menuLeft.current.classList.toggle("active");
-
+  const menuLogin = () => {
+    menuToggle();
+    setOpenPopup(true);
+  };
   return (
     <div className="header" ref={headerRef}>
       <div className="container">
@@ -165,7 +168,7 @@ const Header = () => {
               </div>
             ))}
             <div className="header__menu__item header__menu__left__item">
-              <span onClick={() => setOpenPopup(true)}>Đăng Nhập</span>
+              <span onClick={() => menuLogin()}>Đăng Nhập</span>
             </div>
             <FormInfor
               title="Vui Lòng Điền Thông Tin"
