@@ -27,14 +27,15 @@ const ProductCard = (props) => {
 
   return (
     <div className="product-card">
-      <Link to={`/product/${props.slug}`}>
+      <div onClick={() => setOpenPopup(true)}>
         <div className="product-card__image">
           <img src={props.img01} alt="" />
           <img src={props.img02} alt="" />
         </div>
-        <h3 className="product-card__name">{props.name}</h3>
-        <span>{props.quantity}</span>
-      </Link>
+      </div>
+
+      <h3 className="product-card__name">{props.name}</h3>
+      <span>{props.quantity}</span>
       <div className="product-card__btn">
         <Button
           size="sm"

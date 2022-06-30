@@ -52,7 +52,6 @@
 .MuiTypography-h6 {
       line-height: 2.6 !important;
   }
-.grid .grid-col-3 .grid-col-md-2 .grid-col-sm-1{
-    border-top: 2px solid #e5e3e3;
-    padding-top: 20px;
+.grid {
+    gap:20px
 }

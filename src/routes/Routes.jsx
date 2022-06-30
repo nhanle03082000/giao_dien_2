@@ -5,21 +5,19 @@ import { createBrowserHistory } from "history";
 
 import Home from "../pages/Home";
 import Product from "../pages/Product";
-import ProductContextProvider from "../contexts/ProductContext";
+import LocationContextProvider from "../contexts/LocationContext";
 const history = createBrowserHistory();
 
 const Routes = () => {
   return (
-    <ProductContextProvider>
-      <Route history={history}>
-        <Switch>
-          <ProductContextProvider>
-            <Route path="/" exact component={Home} />
-            <Route path="/product/" component={Product} />
-          </ProductContextProvider>
-        </Switch>
-      </Route>
-    </ProductContextProvider>
+    <Route history={history}>
+      <Switch>
+        <LocationContextProvider>
+          <Route path="/" exact component={Home} />
+          <Route path="/product/" component={Product} />
+        </LocationContextProvider>
+      </Switch>
+    </Route>
   );
 };
 

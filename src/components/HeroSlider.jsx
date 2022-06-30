@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import Slider from "react-slick";
 import "./controls/index.css";
-import slider1 from "../assets/images/slider/slider1.png";
-import slider2 from "../assets/images/slider/slider2.png";
-import slider3 from "../assets/images/slider/slider3.png";
+import slider1 from "../assets/images/slider/Banner1.png";
+import slider2 from "../assets/images/slider/Banner2.png";
+import slider3 from "../assets/images/slider/Banner3.png";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (

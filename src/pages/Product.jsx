@@ -9,75 +9,52 @@ import ProductView from "../components/ProductView";
 import Section, { SectionTitle, SectionBody } from "../components/Section";
 import Grid from "../components/Grid";
 import Select from "react-select";
-import { ProductContext } from "../contexts/ProductContext";
+import { LocationContext } from "../contexts/LocationContext";
 import "../components/controls/index.css";
-const options = [
-  { value: "AGI", label: "An Giang" },
-  { value: "BLI", label: "Bạc Liêu" },
-  { value: "BTR", label: "Bến Tre" },
-  { value: "CMA", label: "Cà Mau" },
-  { value: "HGI", label: "Hậu Giang" },
-  { value: "KGI", label: "Kiên Giang" },
-  { value: "PQU", label: "Phú Quốc" },
-  { value: "STR", label: "Sóc Trăng" },
-  { value: "TGI", label: "Tiền Giang" },
-  { value: "TVI", label: "Trà Vinh" },
-  { value: "VLO", label: "Vĩnh Long" },
-  { value: "DTH", label: "Đồng Tháp" },
-  { value: "CTH", label: "Cần Thơ" },
-];
+const options = [{ value: "", label: "" }];
 const Product = ({ location }) => {
   const productList = productData.getAllProducts();
 
   const {
-    productState: { products },
-    getDataProducts,
-  } = useContext(ProductContext);
-  const [ProductForm, setProductForm] = useState({
-    pISDN: "",
-    pMaChiNhanh: "",
+    Location: { maTinh },
+    getDataLocation,
+  } = useContext(LocationContext);
+  const [maSoTinh, setmaSoTinh] = useState({
+    pIsPhanQuyen: 0,
   });
-  const [sdt, setSdt] = useState("");
-  const [dataProduct, setDataProduct] = useState("");
-  console.log("dataProduct", products);
-  const { pISDN, pMaChiNhanh } = ProductForm;
+  const { pIsPhanQuyen } = maSoTinh;
+  console.log("maSoTinh", maTinh);
   const [isClearable, setIsClearable] = useState(true);
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const q = params.get("pISDN");
-    setSdt(q);
-  }, []);
+
   const onChange = (data) => {
-    console.log("nhanle data value", data);
-    if (data)
-      setProductForm({
-        pISDN: sdt,
-        pMaChiNhanh: data.value,
-      });
+    // console.log("nhanle data value", data);
+    // if (data)
+    //   setmaSoTinh({
+    //     pISDN: sdt,
+    //     pMaChiNhanh: data.value,
+    //   });
   };
   // nhanle test
   useEffect(() => {
-    async function getProduct() {
+    async function getData() {
       try {
-        const newProduct = await getDataProducts(ProductForm);
+        const newProduct = await getDataLocation(maSoTinh);
         console.log("new-data", newProduct);
-        setDataProduct(newProduct);
       } catch (error) {
         return false;
       }
       return true;
     }
-    getProduct();
-  }, [pMaChiNhanh]);
+    getData();
+  }, [pIsPhanQuyen]);
+
+  // const option = maTinh.map((item, index)=>{
+  //   value : item.mstinh,
+  //   label : item.tentinh
+  // });
 
   return (
     <Helmet title="nhale">
-      {/* <Section>
-        <SectionBody>
-          <ProductView product={product} />
-        </SectionBody>
-      </Section> */}
-
       <Section>
         <SectionTitle>Thông Tin Khách Hàng</SectionTitle>
         <Section>
@@ -131,7 +108,7 @@ const Product = ({ location }) => {
         </SectionBody>
 
         <SectionBody>
-          <Grid col={4} mdCol={2} smCol={1} gap={20}>
+          <Grid col={4} mdCol={2} smCol={1} gap={30}>
             {productList.map((item, index) => (
               <ProductCard
                 key={index}

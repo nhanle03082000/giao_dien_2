@@ -8,7 +8,7 @@ import ProductCard from "../components/ProductCard";
 //test
 import productData from "../assets/fake-data/products";
 import Select from "react-select";
-import { ProductContext } from "../contexts/ProductContext";
+import { LocationContext } from "../contexts/LocationContext";
 import { createBrowserHistory } from "history";
 import Banner from "../components/Banner";
 import banner1 from "../assets/images/banner1.png";
@@ -38,7 +38,7 @@ const Home = ({ location }) => {
   const {
     productState: { products },
     getDataProducts,
-  } = useContext(ProductContext);
+  } = useContext(LocationContext);
   const [ProductForm, setProductForm] = useState({
     pISDN: "",
     pMaChiNhanh: "",
@@ -86,10 +86,9 @@ const Home = ({ location }) => {
               col={3}
               mdCol={2}
               smCol={1}
-              gap={20}
               style={{
-                paddingTop: "35px",
-                borderTop: "3px solid #eaeaea",
+                paddingTop: "45px",
+                borderTop: "3px solid #d1cfcf",
               }}
             >
               <Banner img={banner1} />

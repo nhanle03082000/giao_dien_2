@@ -6,21 +6,21 @@ export const productReducer = (state, action) => {
     case "PRODUCT_LOAD_SCCUESS":
       return {
         ...state,
-        products: payload,
-        productsLoading: false,
+        maTinh: payload,
+        maTinhLoading: false,
       };
     case "CATEGORIES_LOAD_FAIL":
       return {
         ...state,
-        products: [],
-        productsLoading: false,
+        maTinh: [],
+        maTinhLoading: false,
       };
     case "ADD_MST_SDT":
       return {
         ...state,
-        products: action.payload,
+        maTinh: action.payload,
         // products: [...state.products, payload],
-        productsLoading: false,
+        maTinhLoading: false,
       };
     default:
       return state;
