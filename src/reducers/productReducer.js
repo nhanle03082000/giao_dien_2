@@ -3,13 +3,13 @@ import { act } from "react-dom/test-utils";
 export const productReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
-    case "PRODUCT_LOAD_SCCUESS":
+    case "LOCATION_LOAD_SCUSESS":
       return {
         ...state,
         maTinh: payload,
         maTinhLoading: false,
       };
-    case "CATEGORIES_LOAD_FAIL":
+    case "LOCATION_LOAD_FAIL":
       return {
         ...state,
         maTinh: [],
@@ -19,7 +19,14 @@ export const productReducer = (state, action) => {
       return {
         ...state,
         maTinh: action.payload,
-        // products: [...state.products, payload],
+        // maTinh: [...state.maTinh, payload],
+        maTinhLoading: false,
+      };
+    case "ADD_MS_HUYEN":
+      return {
+        ...state,
+        maHuyen: action.payload,
+        // maHuyen: [...state.maHuyen, payload],
         maTinhLoading: false,
       };
     default:

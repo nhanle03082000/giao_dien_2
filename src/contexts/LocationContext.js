@@ -6,12 +6,11 @@ import { productReducer } from "../reducers/productReducer";
 export const LocationContext = createContext();
 const LocationContextProvider = ({ children }) => {
   const [Location, dispatch] = useReducer(productReducer, {
-    maTinh: "",
+    maTinh: [],
+    maHuyen: [],
     maTinhLoading: true,
   });
   const getDataLocation = async (maSoTinh) => {
-    console.log("maSoTinh context", maSoTinh);
-
     try {
       const response = await axios.post(
         `${apiUrl}/danhmuc/tinh?a=select`,
@@ -24,9 +23,31 @@ const LocationContextProvider = ({ children }) => {
           },
         }
       );
-      console.log("TỈnh thành phố context", response.data);
       if (response.data)
         dispatch({ type: "ADD_MST_SDT", payload: response.data.data });
+      return response.data.data;
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, message: "Server Error" };
+    }
+  };
+
+  const getMaQuan = async (maSoHuyen) => {
+    // console.log("mã số huyên context", maSoHuyen);
+    try {
+      const response = await axios.post(
+        `${apiUrl}/danhmuc/huyen?a=select`,
+        {
+          jsonData: maSoHuyen,
+        },
+        {
+          headers: {
+            Authorization: Token_Location,
+          },
+        }
+      );
+      if (response.data) console.log("ma số huyện", response.data);
+      dispatch({ type: "ADD_MS_HUYEN", payload: response.data.data });
       return response.data.data;
     } catch (error) {
       if (error.response.data) return error.response.data;
@@ -36,6 +57,7 @@ const LocationContextProvider = ({ children }) => {
   const LocationContextData = {
     Location,
     getDataLocation,
+    getMaQuan,
   };
   return (
     <LocationContext.Provider value={LocationContextData}>

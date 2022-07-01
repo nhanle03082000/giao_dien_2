@@ -116,21 +116,21 @@ const Header = () => {
     setRecordForEdit(null);
     setOpenPopup(false);
   };
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (
-        document.body.scrollTop > 80 ||
-        document.documentElement.scrollTop > 80
-      ) {
-        headerRef.current.classList.add("shrink");
-      } else {
-        headerRef.current.classList.remove("shrink");
-      }
-    });
-    return () => {
-      window.removeEventListener("scroll");
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     if (
+  //       document.body.scrollTop > 80 ||
+  //       document.documentElement.scrollTop > 80
+  //     ) {
+  //       headerRef.current.classList.add("shrink");
+  //     } else {
+  //       headerRef.current.classList.remove("shrink");
+  //     }
+  //   });
+  //   return () => {
+  //     window.removeEventListener("scroll");
+  //   };
+  // }, []);
 
   const menuLeft = useRef(null);
 

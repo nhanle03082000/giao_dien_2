@@ -11,48 +11,66 @@ import Grid from "../components/Grid";
 import Select from "react-select";
 import { LocationContext } from "../contexts/LocationContext";
 import "../components/controls/index.css";
-const options = [{ value: "", label: "" }];
-const Product = ({ location }) => {
+const Product = () => {
   const productList = productData.getAllProducts();
-
   const {
-    Location: { maTinh },
+    Location: { maTinh, maHuyen },
     getDataLocation,
+    getMaQuan,
   } = useContext(LocationContext);
+  console.log("ma huyện payload", maHuyen);
+  console.log("ma thanh phố payload", maTinh);
   const [maSoTinh, setmaSoTinh] = useState({
     pIsPhanQuyen: 0,
   });
   const { pIsPhanQuyen } = maSoTinh;
-  console.log("maSoTinh", maTinh);
-  const [isClearable, setIsClearable] = useState(true);
+  const [dataHuyen, setdataHuyen] = useState({
+    pMsTinh: "",
+    pPhanLoai: "",
+  });
+  const { pMsTinh, pPhanLoai } = dataHuyen;
+  // console.log("nhanle data dataHuyen", dataHuyen);
 
   const onChange = (data) => {
-    // console.log("nhanle data value", data);
-    // if (data)
-    //   setmaSoTinh({
-    //     pISDN: sdt,
-    //     pMaChiNhanh: data.value,
-    //   });
+    if (data)
+      setdataHuyen({
+        pMsTinh: data.value,
+        pPhanLoai: 1,
+      });
   };
-  // nhanle test
   useEffect(() => {
     async function getData() {
       try {
-        const newProduct = await getDataLocation(maSoTinh);
-        console.log("new-data", newProduct);
+        const newDataHuyen = await getDataLocation(maSoTinh);
+        // console.log("new-data huyện", newDataHuyen);
       } catch (error) {
         return false;
       }
       return true;
     }
     getData();
-  }, [pIsPhanQuyen]);
+  }, []);
+  useEffect(() => {
+    async function getDataHuyen() {
+      try {
+        const newMaHuyen = await getMaQuan(dataHuyen);
+        // console.log("newMaHuyen", newMaHuyen);
+      } catch (error) {
+        return false;
+      }
+      return true;
+    }
+    getDataHuyen();
+  }, [dataHuyen]);
+  const mappOptions = maTinh.map((item, index) => ({
+    value: item.mstinh,
+    label: item.tentinh,
+  }));
 
-  // const option = maTinh.map((item, index)=>{
-  //   value : item.mstinh,
-  //   label : item.tentinh
-  // });
-
+  const OptionHuyen = maHuyen.map((item, index) => ({
+    value: item.mshuyen,
+    label: item.tenhuyen,
+  }));
   return (
     <Helmet title="nhale">
       <Section>
@@ -78,7 +96,7 @@ const Product = ({ location }) => {
                   className="basic-single"
                   classNamePrefix="select"
                   placeholder="Thành Phố"
-                  options={options}
+                  options={mappOptions}
                   onChange={onChange}
                 />
               </div>
@@ -88,7 +106,7 @@ const Product = ({ location }) => {
                   className="basic-single"
                   classNamePrefix="select"
                   placeholder="Quận"
-                  options={options}
+                  options={OptionHuyen}
                   onChange={onChange}
                 />
               </div>
@@ -98,8 +116,8 @@ const Product = ({ location }) => {
                   className="basic-single"
                   classNamePrefix="select"
                   placeholder="Cửa Hàng"
-                  options={options}
-                  onChange={onChange}
+                  // // options={options}
+                  // onChange={onChange}
                   // isClearable={isClearable}
                 />
               </div>
