@@ -14,12 +14,11 @@ import "../components/controls/index.css";
 const Product = () => {
   const productList = productData.getAllProducts();
   const {
-    Location: { maTinh, maHuyen },
+    Location: { maTinh, maHuyen, dataShop },
     getDataLocation,
     getMaQuan,
+    GetShopLocation,
   } = useContext(LocationContext);
-  console.log("ma huyện payload", maHuyen);
-  console.log("ma thanh phố payload", maTinh);
   const [maSoTinh, setmaSoTinh] = useState({
     pIsPhanQuyen: 0,
   });
@@ -28,21 +27,47 @@ const Product = () => {
     pMsTinh: "",
     pPhanLoai: "",
   });
-  const { pMsTinh, pPhanLoai } = dataHuyen;
-  // console.log("nhanle data dataHuyen", dataHuyen);
+  const [listShop, setListShop] = useState({
+    pMaTinh: "",
+    pMaHuyen: "",
+    pLoai: 2,
+    pIsPhanQuyen: 0,
+    pShopName: "",
+  });
 
+  const [data, setData] = useState({
+    city: "",
+    district: "",
+    shop: "",
+  });
+
+  const handleChangeInput = (event) => {
+    console.log(event);
+    let { name, value } = event.target;
+    setData((data) => ({
+      ...data,
+      [name]: value,
+    }));
+  };
+
+  console.log("data listshoop", listShop);
   const onChange = (data) => {
     if (data)
-      setdataHuyen({
-        pMsTinh: data.value,
-        pPhanLoai: 1,
-      });
+      if (data)
+        setdataHuyen({
+          pMsTinh: data.value,
+          pPhanLoai: 1,
+        });
+    setListShop({ ...listShop, pMaTinh: data.name });
+  };
+  const onChangeDistrict = (data) => {
+    if (data) console.log("data district", data);
+    setListShop({ ...listShop, pMaHuyen: data.name });
   };
   useEffect(() => {
     async function getData() {
       try {
         const newDataHuyen = await getDataLocation(maSoTinh);
-        // console.log("new-data huyện", newDataHuyen);
       } catch (error) {
         return false;
       }
@@ -54,7 +79,6 @@ const Product = () => {
     async function getDataHuyen() {
       try {
         const newMaHuyen = await getMaQuan(dataHuyen);
-        // console.log("newMaHuyen", newMaHuyen);
       } catch (error) {
         return false;
       }
@@ -62,14 +86,30 @@ const Product = () => {
     }
     getDataHuyen();
   }, [dataHuyen]);
+  useEffect(() => {
+    async function getDataShop() {
+      try {
+        const newListShop = await GetShopLocation(listShop);
+      } catch (error) {
+        return false;
+      }
+      return true;
+    }
+    getDataShop();
+  }, [maSoTinh, listShop]);
   const mappOptions = maTinh.map((item, index) => ({
     value: item.mstinh,
     label: item.tentinh,
+    name: item.matinh,
   }));
-
   const OptionHuyen = maHuyen.map((item, index) => ({
     value: item.mshuyen,
     label: item.tenhuyen,
+    name: item.mahuyen,
+  }));
+  const OptionListShop = dataShop.map((item, index) => ({
+    value: item.shop_id,
+    label: item.shop_name,
   }));
   return (
     <Helmet title="nhale">
@@ -97,7 +137,9 @@ const Product = () => {
                   classNamePrefix="select"
                   placeholder="Thành Phố"
                   options={mappOptions}
-                  onChange={onChange}
+                  onChange={handleChangeInput}
+                  // value={mappOptions}
+                  name="city"
                 />
               </div>
               <div className="select-child">
@@ -107,7 +149,8 @@ const Product = () => {
                   classNamePrefix="select"
                   placeholder="Quận"
                   options={OptionHuyen}
-                  onChange={onChange}
+                  onChange={onChangeDistrict}
+                  name="district"
                 />
               </div>
               <div className="select-child">
@@ -116,9 +159,10 @@ const Product = () => {
                   className="basic-single"
                   classNamePrefix="select"
                   placeholder="Cửa Hàng"
-                  // // options={options}
+                  options={OptionListShop}
                   // onChange={onChange}
                   // isClearable={isClearable}
+                  name="shop"
                 />
               </div>
             </div>
