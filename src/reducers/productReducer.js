@@ -29,6 +29,13 @@ export const productReducer = (state, action) => {
         // maHuyen: [...state.maHuyen, payload],
         maTinhLoading: false,
       };
+    case "ADD_DATA_SHOP_LOCATION":
+      return {
+        ...state,
+        dataShop: action.payload,
+        // maHuyen: [...state.maHuyen, payload],
+        maTinhLoading: false,
+      };
     default:
       return state;
   }

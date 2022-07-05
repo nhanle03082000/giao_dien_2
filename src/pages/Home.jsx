@@ -14,24 +14,9 @@ import Banner from "../components/Banner";
 import banner1 from "../assets/images/banner1.png";
 import banner2 from "../assets/images/banner2.png";
 import banner3 from "../assets/images/banner3_verson3.png";
+import { AuthContext } from "../contexts/AuthContext";
 
-const options = [
-  { value: "AGI", label: "T. An Giang" },
-  { value: "BLI", label: "T. Bạc Liêu" },
-  { value: "BTR", label: "T. Bến Tre" },
-  { value: "CMA", label: "T. Cà Mau" },
-  { value: "HGI", label: "T. Hậu Giang" },
-  { value: "KGI", label: "T. Kiên Giang" },
-  { value: "PQU", label: "T. Phú Quốc" },
-  { value: "STR", label: "T. Sóc Trăng" },
-  { value: "TGI", label: "T. Tiền Giang" },
-  { value: "TVI", label: "T. Trà Vinh" },
-  { value: "VLO", label: "T. Vĩnh Long" },
-  { value: "DTH", label: "T. Đồng Tháp" },
-  { value: "CTH", label: "T. Cần Thơ" },
-];
 const history = createBrowserHistory();
-
 const Home = ({ location }) => {
   // const productList = productData.getAllProducts();
 

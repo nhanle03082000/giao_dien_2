@@ -19,8 +19,6 @@ const Layout = () => {
               </div>
             </div>
             <Footer />
-            {/* <ProductViewModal /> */}
-            {/* đây là modal khi nguiowf dùng nhấn vào nút vào nút chọn quà  */}
           </div>
         )}
       />
