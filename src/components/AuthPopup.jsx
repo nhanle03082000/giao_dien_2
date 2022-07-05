@@ -1,41 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import Controls from "./controls/Controls";
 import { useForm, Form } from "./controls/useForm";
 import * as Service from "../services/Service";
 import "./controls/index.css";
-const genderItems = [
-  { id: "male", title: "Male" },
-  { id: "female", title: "Female" },
-  { id: "other", title: "Other" },
-];
+import { AuthContext } from "../contexts/AuthContext";
+import { LocationContext } from "../contexts/LocationContext";
+import { useHistory } from "react-router-dom";
+import { checkAuth } from "../api/check.api";
 
 const initialFValues = {
-  id: 0,
-  maquatang: "",
-  email: "",
-  mobile: "",
-  city: "",
-  gender: "male",
-  departmentId: "",
-  hireDate: new Date(),
-  isPermanent: false,
+  pMaXacNhan: "GCGUHVQG",
+  pISDN: "911656561",
 };
-
 export default function AuthPopup(props) {
+  const history = useHistory();
   const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-    if ("maquatang" in fieldValues)
-      temp.maquatang = fieldValues.maquatang ? "" : "Tên Không Được Để Trống ";
+    if ("pMaXacNhan" in fieldValues)
+      temp.pMaXacNhan = fieldValues.pMaXacNhan
+        ? ""
+        : "Tên Không Được Để Trống ";
     if ("email" in fieldValues)
       temp.email = /$^|.+@.+..+/.test(fieldValues.email)
         ? ""
         : "Email is not valid.";
-    if ("mobile" in fieldValues)
-      temp.mobile =
-        fieldValues.mobile.length > 9 ? "" : "Số Điện Thoại Không Hợp Lệ ";
+    if ("pISDN" in fieldValues)
+      temp.pISDN =
+        fieldValues.pISDN.length > 8 ? "" : "Số Điện Thoại Không Hợp Lệ ";
     if ("departmentId" in fieldValues)
       temp.departmentId =
         fieldValues.departmentId.length !== 0 ? "" : "Vui Lòng Chọn Số Lượng";
@@ -50,11 +44,27 @@ export default function AuthPopup(props) {
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFValues, true, validate);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       addOrEdit(values, resetForm);
     }
+    await checkAuth(values)
+      .then((res) => {
+        console.log("dataa bene popup", res.data);
+        history.push({
+          pathname: "/product",
+          state: { detail: res.data },
+          // search: `?email=${data.email}`,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+
+        //  props.handleChangeLoading(false);
+        //  setOpenModal(true);
+      });
+    // history.push("/product");
   };
 
   useEffect(() => {
@@ -76,24 +86,18 @@ export default function AuthPopup(props) {
         <Grid>
           <Controls.Input
             label="Số Điện Thoại"
-            name="email"
-            value={values.mobile}
+            name="pISDN"
+            value={values.pISDN}
             onChange={handleInputChange}
-            error={errors.mobile}
+            error={errors.pISDN}
           />
           <Controls.Input
-            name="maquatang"
+            name="pMaXacNhan"
             label="Mã Quà Tặng"
-            value={values.maquatang}
+            value={values.pMaXacNhan}
             onChange={handleInputChange}
-            error={errors.maquatang}
+            error={errors.pMaXacNhan}
           />
-          {/* <Controls.Checkbox
-            name="isPermanent"
-            label="Permanent Employee"
-            value={values.isPermanent}
-            onChange={handleInputChange}
-          /> */}
 
           <div className="control-button">
             <Controls.Button type="submit" text="Xác Nhận" />

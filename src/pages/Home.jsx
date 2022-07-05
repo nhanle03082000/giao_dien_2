@@ -14,64 +14,15 @@ import Banner from "../components/Banner";
 import banner1 from "../assets/images/banner1.png";
 import banner2 from "../assets/images/banner2.png";
 import banner3 from "../assets/images/banner3_verson3.png";
+import { AuthContext } from "../contexts/AuthContext";
 
-const options = [
-  { value: "AGI", label: "T. An Giang" },
-  { value: "BLI", label: "T. Bạc Liêu" },
-  { value: "BTR", label: "T. Bến Tre" },
-  { value: "CMA", label: "T. Cà Mau" },
-  { value: "HGI", label: "T. Hậu Giang" },
-  { value: "KGI", label: "T. Kiên Giang" },
-  { value: "PQU", label: "T. Phú Quốc" },
-  { value: "STR", label: "T. Sóc Trăng" },
-  { value: "TGI", label: "T. Tiền Giang" },
-  { value: "TVI", label: "T. Trà Vinh" },
-  { value: "VLO", label: "T. Vĩnh Long" },
-  { value: "DTH", label: "T. Đồng Tháp" },
-  { value: "CTH", label: "T. Cần Thơ" },
-];
 const history = createBrowserHistory();
-
 const Home = ({ location }) => {
-  const productList = productData.getAllProducts();
-
   const {
-    productState: { products },
-    getDataProducts,
-  } = useContext(LocationContext);
-  const [ProductForm, setProductForm] = useState({
-    pISDN: "",
-    pMaChiNhanh: "",
-  });
-  const [sdt, setSdt] = useState("");
-  const [dataProduct, setDataProduct] = useState("");
-  console.log("dataProduct", products);
-  const { pISDN, pMaChiNhanh } = ProductForm;
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const q = params.get("pISDN");
-    setSdt(q);
-  }, []);
-  const onChange = (data) => {
-    setProductForm({
-      pISDN: sdt,
-      pMaChiNhanh: data.value,
-    });
-  };
-  // nhanle test
-  useEffect(() => {
-    async function getProduct() {
-      try {
-        const newProduct = await getDataProducts(ProductForm);
-        console.log("new-data", newProduct);
-        setDataProduct(newProduct);
-      } catch (error) {
-        return false;
-      }
-      return true;
-    }
-    getProduct();
-  }, [pMaChiNhanh]);
+    authState: { Users },
+    checkAuth,
+  } = useContext(AuthContext);
+
   return (
     <Helmet title="Trang chủ">
       {/* hero slider */}

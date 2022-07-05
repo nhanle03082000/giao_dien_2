@@ -3,15 +3,15 @@ import React, { useContext, useState, useEffect } from "react";
 import PolicyCard from "../components/PolicyCard";
 import productData from "../assets/fake-data/products";
 import ProductCard from "../components/ProductCard";
-
+import { useLocation } from "react-router-dom";
 import Helmet from "../components/Helmet";
-import ProductView from "../components/ProductView";
 import Section, { SectionTitle, SectionBody } from "../components/Section";
 import Grid from "../components/Grid";
 import Select from "react-select";
 import { LocationContext } from "../contexts/LocationContext";
 import "../components/controls/index.css";
 const Product = () => {
+  const location = useLocation();
   const productList = productData.getAllProducts();
   const {
     Location: { maTinh, maHuyen, dataShop },
@@ -41,16 +41,6 @@ const Product = () => {
     shop: "",
   });
 
-  const handleChangeInput = (event) => {
-    console.log(event);
-    let { name, value } = event.target;
-    setData((data) => ({
-      ...data,
-      [name]: value,
-    }));
-  };
-
-  console.log("data listshoop", listShop);
   const onChange = (data) => {
     if (data)
       if (data)
@@ -58,14 +48,14 @@ const Product = () => {
           pMsTinh: data.value,
           pPhanLoai: 1,
         });
-    setListShop({ ...listShop, pMaTinh: data.name });
+    setListShop({ pMaTinh: data.name });
   };
   const onChangeDistrict = (data) => {
-    if (data) console.log("data district", data);
     setListShop({ ...listShop, pMaHuyen: data.name });
   };
   useEffect(() => {
     async function getData() {
+      console.log("location", location.state.detail);
       try {
         const newDataHuyen = await getDataLocation(maSoTinh);
       } catch (error) {
@@ -74,7 +64,7 @@ const Product = () => {
       return true;
     }
     getData();
-  }, []);
+  }, [location]);
   useEffect(() => {
     async function getDataHuyen() {
       try {
@@ -96,7 +86,7 @@ const Product = () => {
       return true;
     }
     getDataShop();
-  }, [maSoTinh, listShop]);
+  }, [maSoTinh, listShop, dataHuyen]);
   const mappOptions = maTinh.map((item, index) => ({
     value: item.mstinh,
     label: item.tentinh,
@@ -137,7 +127,10 @@ const Product = () => {
                   classNamePrefix="select"
                   placeholder="Thành Phố"
                   options={mappOptions}
-                  onChange={handleChangeInput}
+                  // onChange={(value, action) => {
+                  //   hanldeChange(value, action);
+                  // }}
+                  onChange={onChange}
                   // value={mappOptions}
                   name="city"
                 />
