@@ -33,45 +33,45 @@ const options = [
 const history = createBrowserHistory();
 
 const Home = ({ location }) => {
-  const productList = productData.getAllProducts();
+  // const productList = productData.getAllProducts();
 
-  const {
-    productState: { products },
-    getDataProducts,
-  } = useContext(LocationContext);
-  const [ProductForm, setProductForm] = useState({
-    pISDN: "",
-    pMaChiNhanh: "",
-  });
-  const [sdt, setSdt] = useState("");
-  const [dataProduct, setDataProduct] = useState("");
-  console.log("dataProduct", products);
-  const { pISDN, pMaChiNhanh } = ProductForm;
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const q = params.get("pISDN");
-    setSdt(q);
-  }, []);
-  const onChange = (data) => {
-    setProductForm({
-      pISDN: sdt,
-      pMaChiNhanh: data.value,
-    });
-  };
-  // nhanle test
-  useEffect(() => {
-    async function getProduct() {
-      try {
-        const newProduct = await getDataProducts(ProductForm);
-        console.log("new-data", newProduct);
-        setDataProduct(newProduct);
-      } catch (error) {
-        return false;
-      }
-      return true;
-    }
-    getProduct();
-  }, [pMaChiNhanh]);
+  // const {
+  //   productState: { products },
+  //   getDataProducts,
+  // } = useContext(LocationContext);
+  // const [ProductForm, setProductForm] = useState({
+  //   pISDN: "",
+  //   pMaChiNhanh: "",
+  // });
+  // const [sdt, setSdt] = useState("");
+  // const [dataProduct, setDataProduct] = useState("");
+  // console.log("dataProduct", products);
+  // const { pISDN, pMaChiNhanh } = ProductForm;
+  // useEffect(() => {
+  //   const params = new URLSearchParams(location.search);
+  //   const q = params.get("pISDN");
+  //   setSdt(q);
+  // }, []);
+  // const onChange = (data) => {
+  //   setProductForm({
+  //     pISDN: sdt,
+  //     pMaChiNhanh: data.value,
+  //   });
+  // };
+  // // nhanle test
+  // useEffect(() => {
+  //   async function getProduct() {
+  //     try {
+  //       const newProduct = await getDataProducts(ProductForm);
+  //       console.log("new-data", newProduct);
+  //       setDataProduct(newProduct);
+  //     } catch (error) {
+  //       return false;
+  //     }
+  //     return true;
+  //   }
+  //   getProduct();
+  // }, [pMaChiNhanh]);
   return (
     <Helmet title="Trang chủ">
       {/* hero slider */}

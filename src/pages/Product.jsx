@@ -38,6 +38,14 @@ const Product = () => {
         pPhanLoai: 1,
       });
   };
+
+  const onChange1 = (data) => {
+    // if (data)
+    //   setdataHuyen({
+    //     pMsTinh: data.value,
+    //     pPhanLoai: 1,
+    //   });
+  };
   useEffect(() => {
     async function getData() {
       try {
@@ -51,17 +59,20 @@ const Product = () => {
     getData();
   }, []);
   useEffect(() => {
-    async function getDataHuyen() {
-      try {
-        const newMaHuyen = await getMaQuan(dataHuyen);
-        // console.log("newMaHuyen", newMaHuyen);
-      } catch (error) {
-        return false;
+    if (dataHuyen.pMsTinh != "") {
+      async function getDataHuyen() {
+        try {
+          const newMaHuyen = await getMaQuan(dataHuyen);
+          // console.log("newMaHuyen", newMaHuyen);
+        } catch (error) {
+          return false;
+        }
+        return true;
       }
-      return true;
+      getDataHuyen();
     }
-    getDataHuyen();
   }, [dataHuyen]);
+
   const mappOptions = maTinh.map((item, index) => ({
     value: item.mstinh,
     label: item.tentinh,
@@ -107,7 +118,8 @@ const Product = () => {
                   classNamePrefix="select"
                   placeholder="Quận"
                   options={OptionHuyen}
-                  onChange={onChange}
+                  onChange={onChange1}
+                  name
                 />
               </div>
               <div className="select-child">
