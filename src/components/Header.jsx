@@ -1,8 +1,10 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import FormInfor from "./FormInfor";
 import AuthPopup from "./AuthPopup";
 import logo from "../assets/images/logo-small.png";
+import { AuthContext } from "../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 
 const mainNav = [
   {
@@ -17,14 +19,22 @@ const mainNav = [
 ];
 
 const Header = () => {
+  const history = useHistory();
+
+  const { checkAuth } = useContext(AuthContext);
+
   const { pathname } = useLocation();
   const activeNav = mainNav.findIndex((e) => e.path === pathname);
   const [recordForEdit, setRecordForEdit] = useState(null);
 
   const headerRef = useRef(null);
   const [openPopup, setOpenPopup] = useState(false);
-  const addOrEdit = (employee, resetForm) => {
-    console.log("employee", employee);
+  const addOrEdit = async (employee, resetForm) => {
+    const dataLogin = await checkAuth(employee);
+    console.log("data login usercontexxt", dataLogin);
+    history.push({
+      pathname: "/product",
+    });
     resetForm();
     setRecordForEdit(null);
     setOpenPopup(false);

@@ -8,10 +8,16 @@ import "./assets/boxicons-2.0.7/css/boxicons.min.css";
 import "./sass/index.scss";
 
 import Layout from "./components/Layout";
+import AuthContextProvider from "./contexts/AuthContext";
+import LocationContextProvider from "./contexts/LocationContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Layout />
+    <AuthContextProvider>
+      <LocationContextProvider>
+        <Layout />
+      </LocationContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

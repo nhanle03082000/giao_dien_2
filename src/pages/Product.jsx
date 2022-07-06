@@ -1,17 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
-
-import PolicyCard from "../components/PolicyCard";
-import productData from "../assets/fake-data/products";
-import ProductCard from "../components/ProductCard";
-import { useLocation } from "react-router-dom";
-import Helmet from "../components/Helmet";
-import Section, { SectionTitle, SectionBody } from "../components/Section";
-import Grid from "../components/Grid";
+import { useContext, useEffect, useState } from "react";
 import Select from "react-select";
+import productData from "../assets/fake-data/products";
+import Grid from "../components/Grid";
+import Helmet from "../components/Helmet";
+import PolicyCard from "../components/PolicyCard";
+import ProductCard from "../components/ProductCard";
+import Section, { SectionBody, SectionTitle } from "../components/Section";
+import { LOCAL_STORAGE_TOKEN_NAME } from "../contexts/constant";
 import { LocationContext } from "../contexts/LocationContext";
+
 import "../components/controls/index.css";
 const Product = () => {
-  const location = useLocation();
   const productList = productData.getAllProducts();
   const {
     Location: { maTinh, maHuyen, dataShop },
@@ -19,6 +18,10 @@ const Product = () => {
     getMaQuan,
     GetShopLocation,
   } = useContext(LocationContext);
+  const token = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME));
+
+  const userName = token.pResultThueBao;
+  console.log(userName);
   const [maSoTinh, setmaSoTinh] = useState({
     pIsPhanQuyen: 0,
   });
@@ -35,12 +38,6 @@ const Product = () => {
     pShopName: "",
   });
 
-  const [data, setData] = useState({
-    city: "",
-    district: "",
-    shop: "",
-  });
-
   const onChange = (data) => {
     if (data)
       if (data)
@@ -55,7 +52,7 @@ const Product = () => {
   };
   useEffect(() => {
     async function getData() {
-      console.log("location", location.state.detail);
+      // console.log("location", location.state.detail);
       try {
         const newDataHuyen = await getDataLocation(maSoTinh);
       } catch (error) {
@@ -64,7 +61,7 @@ const Product = () => {
       return true;
     }
     getData();
-  }, [location]);
+  }, []);
   useEffect(() => {
     async function getDataHuyen() {
       try {
@@ -101,6 +98,7 @@ const Product = () => {
     value: item.shop_id,
     label: item.shop_name,
   }));
+
   return (
     <Helmet title="nhale">
       <Section>
@@ -108,11 +106,14 @@ const Product = () => {
         <Section>
           <SectionBody>
             <Grid col={2} mdCol={2} smCol={1} gap={20}>
-              <PolicyCard name="jjj" description="{item.description}" />
-              <PolicyCard
-                name="Chào mừng quý khách đến với hệ thống quà tặng của mobifon"
-                description="chúc mừng quý khách nhiều niềm vui trong cuộc sống"
-              />
+              {userName.map((index, data) => (
+                <PolicyCard
+                  key={data}
+                  name={index.hoten}
+                  dateOfBirth={index.ngaysinh}
+                  description="chúc mừng quý khách nhiều niềm vui trong cuộc sống"
+                />
+              ))}
             </Grid>
           </SectionBody>
         </Section>
@@ -122,22 +123,16 @@ const Product = () => {
             <div className="select-main">
               <div className="select-child">
                 <Select
-                  // value={pMaChiNhanh}
                   className="basic-single"
                   classNamePrefix="select"
                   placeholder="Thành Phố"
                   options={mappOptions}
-                  // onChange={(value, action) => {
-                  //   hanldeChange(value, action);
-                  // }}
                   onChange={onChange}
-                  // value={mappOptions}
                   name="city"
                 />
               </div>
               <div className="select-child">
                 <Select
-                  // value={pMaChiNhanh}
                   className="basic-single"
                   classNamePrefix="select"
                   placeholder="Quận"
@@ -148,13 +143,10 @@ const Product = () => {
               </div>
               <div className="select-child">
                 <Select
-                  // value={pMaChiNhanh}
                   className="basic-single"
                   classNamePrefix="select"
                   placeholder="Cửa Hàng"
                   options={OptionListShop}
-                  // onChange={onChange}
-                  // isClearable={isClearable}
                   name="shop"
                 />
               </div>

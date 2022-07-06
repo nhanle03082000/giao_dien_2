@@ -34,7 +34,7 @@ const LocationContextProvider = ({ children }) => {
   };
 
   const getMaQuan = async (maSoHuyen) => {
-    console.log("maSoHuyen context", maSoHuyen);
+    // console.log("maSoHuyen context", maSoHuyen);
 
     try {
       const response = await axios.post(
@@ -59,7 +59,7 @@ const LocationContextProvider = ({ children }) => {
   };
 
   const GetShopLocation = async (dataShopLoacation) => {
-    console.log("listshop context", dataShopLoacation);
+    // console.log("listshop context", dataShopLoacation);
     try {
       const response = await axios.post(
         `${apiUrl}/danhmuc/cuahang?a=select`,
