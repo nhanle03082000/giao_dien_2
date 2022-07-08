@@ -2,10 +2,10 @@ import React from "react";
 import { createContext, useReducer } from "react";
 import axios from "axios";
 import { apiUrl, Token_Location } from "./constant";
-import { productReducer } from "../reducers/productReducer";
+import { locationReducer } from "../reducers/locationReducer";
 export const LocationContext = createContext();
 const LocationContextProvider = ({ children }) => {
-  const [Location, dispatch] = useReducer(productReducer, {
+  const [Location, dispatch] = useReducer(locationReducer, {
     maTinh: [],
     maHuyen: [],
     dataShop: [],
@@ -34,8 +34,6 @@ const LocationContextProvider = ({ children }) => {
   };
 
   const getMaQuan = async (maSoHuyen) => {
-    // console.log("maSoHuyen context", maSoHuyen);
-
     try {
       const response = await axios.post(
         `${apiUrl}/danhmuc/huyen?a=select`,
@@ -49,7 +47,6 @@ const LocationContextProvider = ({ children }) => {
         }
       );
       if (response.data)
-        // console.log("ma số huyện", response.data);
         dispatch({ type: "ADD_MS_HUYEN", payload: response.data.data });
       return response.data.data;
     } catch (error) {
@@ -59,7 +56,6 @@ const LocationContextProvider = ({ children }) => {
   };
 
   const GetShopLocation = async (dataShopLoacation) => {
-    // console.log("listshop context", dataShopLoacation);
     try {
       const response = await axios.post(
         `${apiUrl}/danhmuc/cuahang?a=select`,
@@ -72,11 +68,11 @@ const LocationContextProvider = ({ children }) => {
           },
         }
       );
-      if (response.data) console.log("danh sách cua hàng", response.data);
-      dispatch({
-        type: "ADD_DATA_SHOP_LOCATION",
-        payload: response.data.data,
-      });
+      if (response.data)
+        dispatch({
+          type: "ADD_DATA_SHOP_LOCATION",
+          payload: response.data.data,
+        });
       return response.data.data;
     } catch (error) {
       if (error.response.data) return error.response.data;

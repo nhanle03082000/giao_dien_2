@@ -5,6 +5,7 @@ import AuthPopup from "./AuthPopup";
 import logo from "../assets/images/logo-small.png";
 import { AuthContext } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import { LOCAL_STORAGE_TOKEN_NAME } from "../contexts/constant";
 
 const mainNav = [
   {
@@ -19,9 +20,12 @@ const mainNav = [
 ];
 
 const Header = () => {
+  let token = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME));
+  console.log("usersss in ở routers", token);
+  console.log("token headere", token);
   const history = useHistory();
 
-  const { checkAuth } = useContext(AuthContext);
+  const { checkAuth, logoutUser } = useContext(AuthContext);
 
   const { pathname } = useLocation();
   const activeNav = mainNav.findIndex((e) => e.path === pathname);
@@ -47,6 +51,14 @@ const Header = () => {
     menuToggle();
     setOpenPopup(true);
   };
+  const handleLogut = (props) => {
+    console.log("props header", props);
+    menuToggle();
+    logoutUser("hello nhanle");
+    history.push({
+      pathname: "/",
+    });
+  };
   return (
     <div className="header" ref={headerRef}>
       <div className="container">
@@ -65,6 +77,7 @@ const Header = () => {
             </div>
             {mainNav.map((item, index) => (
               <div
+                key={index}
                 className={`header__menu__item header__menu__left__item ${
                   index === activeNav ? "active" : ""
                 }`}
@@ -75,9 +88,15 @@ const Header = () => {
                 </Link>
               </div>
             ))}
-            <div className="header__menu__item header__menu__left__item">
-              <span onClick={() => menuLogin()}>Đăng Nhập</span>
-            </div>
+            {token ? (
+              <div className="header__menu__item header__menu__left__item">
+                <span onClick={() => handleLogut("nhanle")}>Đăng Xuất</span>
+              </div>
+            ) : (
+              <div className="header__menu__item header__menu__left__item">
+                <span onClick={() => menuLogin()}>Đăng Nhập</span>
+              </div>
+            )}
             <FormInfor
               title="Vui Lòng Điền Thông Tin"
               openPopup={openPopup}

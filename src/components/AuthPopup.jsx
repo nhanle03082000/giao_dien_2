@@ -6,11 +6,10 @@ import "./controls/index.css";
 import { Form, useForm } from "./controls/useForm";
 
 const initialFValues = {
-  pMaXacNhan: "GCGUHVQG",
-  pISDN: "911656561",
+  pMaXacNhan: "22RTMRRN",
+  pISDN: "702966613",
 };
 export default function AuthPopup(props) {
-  const history = useHistory();
   const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldValues = values) => {
@@ -45,19 +44,6 @@ export default function AuthPopup(props) {
     if (validate()) {
       addOrEdit(values, resetForm);
     }
-    // await checkAuth(values)
-    //   .then((res) => {
-    //     console.log("dataa bene popup", res.data);
-    //     history.push({
-    //       pathname: "/product",
-    //       state: { detail: res.data },
-    //       // search: `?email=${data.email}`,
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // history.push("/product");
   };
 
   useEffect(() => {

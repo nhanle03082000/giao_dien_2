@@ -10,14 +10,16 @@ import "./sass/index.scss";
 import Layout from "./components/Layout";
 import AuthContextProvider from "./contexts/AuthContext";
 import LocationContextProvider from "./contexts/LocationContext";
-
+import ProductContextProvider from "./contexts/ProductContext";
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <LocationContextProvider>
-        <Layout />
-      </LocationContextProvider>
-    </AuthContextProvider>
+    <ProductContextProvider>
+      <AuthContextProvider>
+        <LocationContextProvider>
+          <Layout />
+        </LocationContextProvider>
+      </AuthContextProvider>
+    </ProductContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

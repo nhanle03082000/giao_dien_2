@@ -55,7 +55,6 @@ export default function PopupForm(props) {
     if (validate()) {
       addOrEdit(values, resetForm);
     }
-    console.log("hello nhanle");
   };
 
   useEffect(() => {

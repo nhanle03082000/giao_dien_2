@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 const PolicyCard = (props) => {
-  const dateOfBirth = props.dateOfBirth;
-  console.log("props dateOfBirth", dateOfBirth);
-
-  console.log("dateOfBirth", dateOfBirth.format("dd/mm/yyyy"));
+  let dateOfBirth = props?.dateOfBirth;
+  let dateExpiration = props?.expiration_date;
+  let startdate = moment(dateOfBirth).subtract(0, "days").format("DD-MM-YYYY");
+  let endDate = moment(dateExpiration).subtract(0, "days").format("DD-MM-YYYY");
 
   return (
     <div className="policy-card">
@@ -12,13 +13,13 @@ const PolicyCard = (props) => {
       <div className="policy-card__info">
         <div className="policy-card__info__name">Kính Mời Quý Khách</div>
         <div className="policy-card__info__description">
-          Tên Khách Hàng: {props.name}
+          Tên Khách Hàng: {props?.name}
         </div>
         <div className="policy-card__info__description">
-          Ngày sinh: {props.dateOfBirth}
+          Ngày sinh: {startdate}
         </div>
         <div className="policy-card__info__description">
-          Ngày Hết Hạn: {props.name}
+          Ngày Hết Hạn: {endDate}
         </div>
       </div>
     </div>
