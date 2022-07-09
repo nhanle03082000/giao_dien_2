@@ -28,9 +28,6 @@ const Product = () => {
     pMsTinh: "",
     pPhanLoai: "",
   });
-  const { pMsTinh, pPhanLoai } = dataHuyen;
-  // console.log("nhanle data dataHuyen", dataHuyen);
-
   const onChange = (data) => {
     if (data)
       setdataHuyen({
@@ -39,18 +36,11 @@ const Product = () => {
       });
   };
 
-  const onChange1 = (data) => {
-    // if (data)
-    //   setdataHuyen({
-    //     pMsTinh: data.value,
-    //     pPhanLoai: 1,
-    //   });
-  };
+  const onChange1 = (data) => {};
   useEffect(() => {
     async function getData() {
       try {
         const newDataHuyen = await getDataLocation(maSoTinh);
-        // console.log("new-data huyện", newDataHuyen);
       } catch (error) {
         return false;
       }
@@ -63,7 +53,6 @@ const Product = () => {
       async function getDataHuyen() {
         try {
           const newMaHuyen = await getMaQuan(dataHuyen);
-          // console.log("newMaHuyen", newMaHuyen);
         } catch (error) {
           return false;
         }
@@ -128,9 +117,6 @@ const Product = () => {
                   className="basic-single"
                   classNamePrefix="select"
                   placeholder="Cửa Hàng"
-                  // // options={options}
-                  // onChange={onChange}
-                  // isClearable={isClearable}
                 />
               </div>
             </div>

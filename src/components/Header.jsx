@@ -1,22 +1,23 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import FormInfor from "./FormInfor";
 import AuthPopup from "./AuthPopup";
 import logo from "../assets/images/logo-small.png";
+import { AuthContext } from "../contexts/AuthContext";
 
 const mainNav = [
   {
     display: "Trang chủ",
     path: "/",
   },
-
-  // {
-  //   display: "Đăng Nhập",
-  //   path: "/product",
-  // },
 ];
 
 const Header = () => {
+  const {
+    authState: { Users },
+  } = useContext(AuthContext);
+  console.log(Users);
+
   const { pathname } = useLocation();
   const activeNav = mainNav.findIndex((e) => e.path === pathname);
   const [recordForEdit, setRecordForEdit] = useState(null);
@@ -25,6 +26,7 @@ const Header = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const addOrEdit = (employee, resetForm) => {
     console.log("employee", employee);
+    console.log("resetForm", resetForm);
     resetForm();
     setRecordForEdit(null);
     setOpenPopup(false);
