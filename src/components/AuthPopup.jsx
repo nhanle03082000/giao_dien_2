@@ -60,7 +60,7 @@ export default function AuthPopup(props) {
         spacing={0}
         direction="column"
         alignItems="center"
-        justify="center"
+        justifyContent="center"
       >
         <Grid>
           <Controls.Input

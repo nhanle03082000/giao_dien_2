@@ -1,12 +1,12 @@
-import React, { useRef, useEffect, useState, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
-import FormInfor from "./FormInfor";
-import AuthPopup from "./AuthPopup";
+import { useContext, useRef, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import logo from "../assets/images/logo-small.png";
+import ModalErrorComponent from "../components/modal/ModalError.component";
 import { AuthContext } from "../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
 import { LOCAL_STORAGE_TOKEN_NAME } from "../contexts/constant";
-
+import AuthPopup from "./AuthPopup";
+import FormInfor from "./FormInfor";
+import LoadingComponent from "./loading/Loading.component";
 const mainNav = [
   {
     display: "Trang chủ",
@@ -21,27 +21,31 @@ const mainNav = [
 
 const Header = () => {
   let token = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME));
-  console.log("usersss in ở routers", token);
-  console.log("token headere", token);
   const history = useHistory();
-
   const { checkAuth, logoutUser } = useContext(AuthContext);
-
   const { pathname } = useLocation();
   const activeNav = mainNav.findIndex((e) => e.path === pathname);
   const [recordForEdit, setRecordForEdit] = useState(null);
-
   const headerRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [openPopup, setOpenPopup] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const addOrEdit = async (employee, resetForm) => {
+    setIsLoading(true);
     const dataLogin = await checkAuth(employee);
-    console.log("data login usercontexxt", dataLogin);
-    history.push({
-      pathname: "/product",
-    });
+    console.log("dataLogin", dataLogin);
+    if (dataLogin.pResultQua) {
+      history.push({
+        pathname: "/product",
+      });
+    } else if (dataLogin.status === 0) {
+      setOpenPopup(false);
+      setOpenModal(true);
+    }
     resetForm();
     setRecordForEdit(null);
     setOpenPopup(false);
+    setIsLoading(false);
   };
 
   const menuLeft = useRef(null);
@@ -58,6 +62,13 @@ const Header = () => {
     history.push({
       pathname: "/",
     });
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+  const handleClickHome = () => {
+    setOpenModal(false);
+    setOpenPopup(true);
   };
   return (
     <div className="header" ref={headerRef}>
@@ -97,6 +108,7 @@ const Header = () => {
                 <span onClick={() => menuLogin()}>Đăng Nhập</span>
               </div>
             )}
+            {isLoading ? <LoadingComponent /> : ""}
             <FormInfor
               title="Vui Lòng Điền Thông Tin"
               openPopup={openPopup}
@@ -104,6 +116,12 @@ const Header = () => {
             >
               <AuthPopup recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
             </FormInfor>
+            <ModalErrorComponent
+              open={openModal}
+              handleClose={handleCloseModal}
+              title="Số điện thoại hoặc mã quà tặng không chính xác!"
+              handleClickHome={handleClickHome}
+            />
           </div>
         </div>
       </div>

@@ -16,6 +16,14 @@ const Routes = () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/product" component={token ? Product : Home} />
+
+        {/* <Route exact path="/" render={() => <Home />} />
+        <Route
+          path="/product"
+          render={() => {
+            token ? <Product /> : <Home />;
+          }}
+        /> */}
       </Switch>
     </Route>
   );

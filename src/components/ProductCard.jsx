@@ -35,7 +35,7 @@ const ProductCard = (props) => {
       </div>
 
       <h3 className="product-card__name">{props.name}</h3>
-      <span>{props.quantity}</span>
+      <div className="product-card__price">{props.price}</div>
       <div className="product-card__btn">
         <Button
           size="sm"

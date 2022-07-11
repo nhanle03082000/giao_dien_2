@@ -12,15 +12,13 @@ import AuthContextProvider from "./contexts/AuthContext";
 import LocationContextProvider from "./contexts/LocationContext";
 import ProductContextProvider from "./contexts/ProductContext";
 ReactDOM.render(
-  <React.StrictMode>
-    <ProductContextProvider>
-      <AuthContextProvider>
-        <LocationContextProvider>
-          <Layout />
-        </LocationContextProvider>
-      </AuthContextProvider>
-    </ProductContextProvider>
-  </React.StrictMode>,
+  <ProductContextProvider>
+    <AuthContextProvider>
+      <LocationContextProvider>
+        <Layout />
+      </LocationContextProvider>
+    </AuthContextProvider>
+  </ProductContextProvider>,
   document.getElementById("root")
 );
 

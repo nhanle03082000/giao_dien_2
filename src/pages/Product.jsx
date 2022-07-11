@@ -44,7 +44,7 @@ const Product = () => {
   });
   const [inforProduct, setInforProduct] = useState({
     pMaChiNhanh: InforUser[0].matinh,
-    pMaCuaHang: "4VLO00082",
+    pMaCuaHang: "",
     pMaCT: InforUser[0].ma_ct,
     pIDThueBao: InforUser[0].id_tb,
   });
@@ -59,32 +59,37 @@ const Product = () => {
   });
   const onChange = (data) => {
     if (data)
-      if (data)
-        setdataHuyen({
-          pMsTinh: data.value,
-          pPhanLoai: 1,
-        });
+      setdataHuyen({
+        pMsTinh: data.value,
+        pPhanLoai: 1,
+      });
     setListShop({ pMaTinh: data.name });
   };
   const onChangeDistrict = (data) => {
     setListShop({ ...listShop, pMaHuyen: data.name });
   };
   const onChangeListShop = async (data) => {
-    const newDataProduct = await checkInventory(inforProduct);
-    console.log("newdataproduct", newDataProduct);
+    if (data) {
+      // let newObject = { ...inforProduct };
+      // newObject["pMaCuaHang"] = data.shop_code;
+
+      // console.log("newObject", newObject);
+      setInforProduct({ ...inforProduct, pMaCuaHang: data.shop_code });
+    }
   };
   useEffect(() => {
     async function getData() {
       try {
         const newDataHuyen = await getDataLocation(maSoTinh);
-        const newDataGift = await receivingGift(InforGigt);
+        // const newDataGift = await receivingGift(InforGigt);
+        const newDataProduct = await checkInventory(inforProduct);
       } catch (error) {
         return false;
       }
       return true;
     }
     getData();
-  }, []);
+  }, [inforProduct]);
   useEffect(() => {
     async function getDataHuyen() {
       try {
@@ -185,13 +190,14 @@ const Product = () => {
 
         <SectionBody>
           <Grid col={4} mdCol={2} smCol={1} gap={30}>
-            {productList.map((item, index) => (
+            {product.map((item, index) => (
               <ProductCard
                 key={index}
                 img01={item.image01}
                 img02={item.image02}
-                name={item.title}
+                name={item.ten_qua}
                 slug={item.slug}
+                price={item.tonkho}
               />
             ))}
           </Grid>
