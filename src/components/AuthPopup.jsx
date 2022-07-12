@@ -1,20 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
-import Controls from "./controls/Controls";
-import { useForm, Form } from "./controls/useForm";
-import * as Service from "../services/Service";
-import "./controls/index.css";
-import { AuthContext } from "../contexts/AuthContext";
-import { LocationContext } from "../contexts/LocationContext";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { checkAuth } from "../api/check.api";
+import Controls from "./controls/Controls";
+import "./controls/index.css";
+import { Form, useForm } from "./controls/useForm";
 
 const initialFValues = {
-  pMaXacNhan: "GCGUHVQG",
-  pISDN: "911656561",
+  pMaXacNhan: "22RTMRRN",
+  pISDN: "702966613",
 };
 export default function AuthPopup(props) {
-  const history = useHistory();
   const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldValues = values) => {
@@ -49,22 +44,6 @@ export default function AuthPopup(props) {
     if (validate()) {
       addOrEdit(values, resetForm);
     }
-    await checkAuth(values)
-      .then((res) => {
-        console.log("dataa bene popup", res.data);
-        history.push({
-          pathname: "/product",
-          state: { detail: res.data },
-          // search: `?email=${data.email}`,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-
-        //  props.handleChangeLoading(false);
-        //  setOpenModal(true);
-      });
-    // history.push("/product");
   };
 
   useEffect(() => {

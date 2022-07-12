@@ -8,7 +8,7 @@ import PopupForm from "../components/PopupForm";
 
 const ProductView = (props) => {
   let product = props.product;
-  console.log("product view", product);
+  // console.log("product view", product);
   if (product === undefined)
     product = {
       title: "",
@@ -26,8 +26,6 @@ const ProductView = (props) => {
 
   const [openPopup, setOpenPopup] = useState(false);
   const addOrEdit = (employee, resetForm) => {
-    // if (employee.id === 0) Service.insertEmployee(employee);
-    // else Service.updateEmployee(employee);
     resetForm();
     setRecordForEdit(null);
     setOpenPopup(false);

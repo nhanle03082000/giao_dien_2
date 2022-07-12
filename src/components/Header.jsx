@@ -1,9 +1,11 @@
-import React, { useRef, useContext, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import FormInfor from "./FormInfor";
 import AuthPopup from "./AuthPopup";
 import logo from "../assets/images/logo-small.png";
 import { AuthContext } from "../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
+import { LOCAL_STORAGE_TOKEN_NAME } from "../contexts/constant";
 
 const mainNav = [
   {
@@ -13,10 +15,12 @@ const mainNav = [
 ];
 
 const Header = () => {
-  const {
-    authState: { Users },
-  } = useContext(AuthContext);
-  console.log(Users);
+  let token = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME));
+  console.log("usersss in ở routers", token);
+  console.log("token headere", token);
+  const history = useHistory();
+
+  const { checkAuth, logoutUser } = useContext(AuthContext);
 
   const { pathname } = useLocation();
   const activeNav = mainNav.findIndex((e) => e.path === pathname);
@@ -24,9 +28,12 @@ const Header = () => {
 
   const headerRef = useRef(null);
   const [openPopup, setOpenPopup] = useState(false);
-  const addOrEdit = (employee, resetForm) => {
-    console.log("employee", employee);
-    console.log("resetForm", resetForm);
+  const addOrEdit = async (employee, resetForm) => {
+    const dataLogin = await checkAuth(employee);
+    console.log("data login usercontexxt", dataLogin);
+    history.push({
+      pathname: "/product",
+    });
     resetForm();
     setRecordForEdit(null);
     setOpenPopup(false);
@@ -38,6 +45,14 @@ const Header = () => {
   const menuLogin = () => {
     menuToggle();
     setOpenPopup(true);
+  };
+  const handleLogut = (props) => {
+    console.log("props header", props);
+    menuToggle();
+    logoutUser("hello nhanle");
+    history.push({
+      pathname: "/",
+    });
   };
   return (
     <div className="header" ref={headerRef}>
@@ -57,6 +72,7 @@ const Header = () => {
             </div>
             {mainNav.map((item, index) => (
               <div
+                key={index}
                 className={`header__menu__item header__menu__left__item ${
                   index === activeNav ? "active" : ""
                 }`}
@@ -67,9 +83,15 @@ const Header = () => {
                 </Link>
               </div>
             ))}
-            <div className="header__menu__item header__menu__left__item">
-              <span onClick={() => menuLogin()}>Đăng Nhập</span>
-            </div>
+            {token ? (
+              <div className="header__menu__item header__menu__left__item">
+                <span onClick={() => handleLogut("nhanle")}>Đăng Xuất</span>
+              </div>
+            ) : (
+              <div className="header__menu__item header__menu__left__item">
+                <span onClick={() => menuLogin()}>Đăng Nhập</span>
+              </div>
+            )}
             <FormInfor
               title="Vui Lòng Điền Thông Tin"
               openPopup={openPopup}
