@@ -7,6 +7,7 @@ const ProductContextProvider = ({ children }) => {
   const [productState, dispatch] = useReducer(productReducer, {
     product: [],
     productLoading: true,
+    checkProduct: "",
   });
   const checkInventory = async (dataProdcut) => {
     console.log("dataProdcut", dataProdcut);
@@ -31,6 +32,8 @@ const ProductContextProvider = ({ children }) => {
     }
   };
   const receivingGift = async (dataGift) => {
+    console.log("dataGift", dataGift);
+
     try {
       const response = await axios.post(
         `${apiUrl_Login}/khoqua/tonkho/giuqua?a=select`,
@@ -44,7 +47,10 @@ const ProductContextProvider = ({ children }) => {
         }
       );
       //   if (response.data) console.log("data gift context", response.data);
-      dispatch({ type: "PRODUCT_LOAD_SCUSESS", payload: response.data.data });
+      dispatch({
+        type: "CHECK_PRODUCT_LOAD_SCUSESS",
+        payload: response.data.data,
+      });
       return response.data.data;
     } catch (error) {
       if (error.response.data) return error.response.data;

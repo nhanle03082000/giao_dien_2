@@ -1,0 +1,12 @@
+.modal-img{
+    width: 25%;
+    margin: 0 auto;
+}
+
+.modal-title{
+    width: 100%;
+    text-align: center;
+    margin-top:20px;
+    font-size: 20px;
+    font-weight: 500;
+}

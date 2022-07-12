@@ -8,6 +8,13 @@ export const productReducer = (state, action) => {
         // maTinh: [...state.maTinh, payload],
         productLoading: false,
       };
+    case "CHECK_PRODUCT_LOAD_SCUSESS":
+      return {
+        ...state,
+        checkProduct: payload,
+        // maTinh: [...state.maTinh, payload],
+        productLoading: false,
+      };
     case "PRODUCT_LOAD_FAIL":
       return {
         ...state,

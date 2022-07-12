@@ -23,7 +23,6 @@ Grid.propTypes = {
   mdCol: PropTypes.number,
   smCol: PropTypes.number,
   gap: PropTypes.number,
-  style: PropTypes.string,
 };
 
 export default Grid;

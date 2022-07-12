@@ -18,19 +18,22 @@ const AuthContextProvider = ({ children }) => {
           jsonData: userForm,
         }
       );
-      if (response.data)
+      if (response.data.data) {
         localStorage.setItem(
           LOCAL_STORAGE_TOKEN_NAME,
           JSON.stringify(response.data.data)
         );
-      let token_user = response.data.data.pResultThueBao[0].id_tb;
-      console.log("token_user", token_user);
 
-      dispatch({ type: "SET_AUTH", payload: response.data.data });
-      return response.data.data;
+        dispatch({ type: "SET_AUTH", payload: response.data.data });
+        console.log(response.data.data);
+        return response.data.data;
+      } else {
+        console.log("khi đăng nhpaja thất bại", response.data);
+        localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, null);
+        return response.data;
+      }
     } catch (error) {
-      if (error.response.data) return error.response.data;
-      else return { success: false, message: "Server Error" };
+      console.log(error);
     }
   };
   const logoutUser = (props) => {
