@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import Select from "react-select";
 import productData from "../assets/fake-data/products";
+import Advertise from "../components/Advertise";
+import "../components/controls/index.css";
 import Grid from "../components/Grid";
 import Helmet from "../components/Helmet";
 import PolicyCard from "../components/PolicyCard";
@@ -8,9 +10,8 @@ import ProductCard from "../components/ProductCard";
 import Section, { SectionBody, SectionTitle } from "../components/Section";
 import { LOCAL_STORAGE_TOKEN_NAME } from "../contexts/constant";
 import { LocationContext } from "../contexts/LocationContext";
-import "../components/controls/index.css";
-import Advertise from "../components/Advertise";
 import { ProductContext } from "../contexts/ProductContext";
+
 const Product = () => {
   const productList = productData.getAllProducts();
   const {
@@ -18,7 +19,6 @@ const Product = () => {
     checkInventory,
     receivingGift,
   } = useContext(ProductContext);
-  console.log("product payload", product);
   const {
     Location: { maTinh, maHuyen, dataShop },
     getDataLocation,
@@ -48,15 +48,7 @@ const Product = () => {
     pMaCT: InforUser[0].ma_ct,
     pIDThueBao: InforUser[0].id_tb,
   });
-  const [InforGigt, setInforGigt] = useState({
-    pIDThueBao: 11142358,
-    pMaKhoTong: "22_KHODVKT",
-    pMaCT: "22_DVKT_TEST01",
-    pMaKhoCN: "VLO",
-    pMaKhoCH: "4VLO00082",
-    pMaQua: "KB24TKT92298",
-    pSoLuong: 1,
-  });
+
   const onChange = (data) => {
     if (data)
       setdataHuyen({
@@ -73,7 +65,6 @@ const Product = () => {
       // let newObject = { ...inforProduct };
       // newObject["pMaCuaHang"] = data.shop_code;
 
-      // console.log("newObject", newObject);
       setInforProduct({ ...inforProduct, pMaCuaHang: data.shop_code });
     }
   };
@@ -81,7 +72,6 @@ const Product = () => {
     async function getData() {
       try {
         const newDataHuyen = await getDataLocation(maSoTinh);
-        // const newDataGift = await receivingGift(InforGigt);
         const newDataProduct = await checkInventory(inforProduct);
       } catch (error) {
         return false;
@@ -128,6 +118,14 @@ const Product = () => {
     shop_code: item.shop_code,
     label: item.shop_name.substring(0, item.shop_name.indexOf("(") - 1),
   }));
+
+  const showListsProduct = product.map((e, index) => {
+    return (
+      <Grid item lg={3}>
+        <ProductCard data={e} />
+      </Grid>
+    );
+  });
   return (
     <Helmet title="nhale">
       <Section>
@@ -190,16 +188,7 @@ const Product = () => {
 
         <SectionBody>
           <Grid col={4} mdCol={2} smCol={1} gap={30}>
-            {product.map((item, index) => (
-              <ProductCard
-                key={index}
-                img01={item.image01}
-                img02={item.image02}
-                name={item.ten_qua}
-                slug={item.slug}
-                price={item.tonkho}
-              />
-            ))}
+            {showListsProduct}
           </Grid>
         </SectionBody>
       </Section>
