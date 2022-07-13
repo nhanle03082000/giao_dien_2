@@ -33,7 +33,6 @@ const Header = () => {
   const addOrEdit = async (employee, resetForm) => {
     setIsLoading(true);
     const dataLogin = await checkAuth(employee);
-    console.log("dataLogin", dataLogin);
     if (dataLogin.pResultQua) {
       history.push({
         pathname: "/product",
@@ -56,7 +55,6 @@ const Header = () => {
     setOpenPopup(true);
   };
   const handleLogut = (props) => {
-    console.log("props header", props);
     menuToggle();
     logoutUser("hello nhanle");
     history.push({

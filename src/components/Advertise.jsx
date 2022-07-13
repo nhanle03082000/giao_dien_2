@@ -7,7 +7,6 @@ const Advertise = (props) => {
     productName.search(" "),
     productName.length
   );
-  // console.log("productName", productName);
 
   return (
     <div className="policy-card">

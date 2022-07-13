@@ -1,3 +1,4 @@
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useContext, useEffect, useState } from "react";
 import Select from "react-select";
 import productData from "../assets/fake-data/products";
@@ -5,26 +6,32 @@ import Advertise from "../components/Advertise";
 import "../components/controls/index.css";
 import Grid from "../components/Grid";
 import Helmet from "../components/Helmet";
+import ModalSuccessComponent from "../components/modal/ModalSuccess.component";
 import PolicyCard from "../components/PolicyCard";
 import ProductCard from "../components/ProductCard";
-import Section, { SectionBody, SectionTitle } from "../components/Section";
+import Section, {
+  SectionBody,
+  SectionTitle,
+  SectionTitleProduct,
+} from "../components/Section";
 import { LOCAL_STORAGE_TOKEN_NAME } from "../contexts/constant";
 import { LocationContext } from "../contexts/LocationContext";
 import { ProductContext } from "../contexts/ProductContext";
+import Button from "../components/Button";
 
 const Product = () => {
-  const productList = productData.getAllProducts();
   const {
     productState: { product },
     checkInventory,
-    receivingGift,
   } = useContext(ProductContext);
+  console.log("product trang chính ", product);
   const {
     Location: { maTinh, maHuyen, dataShop },
     getDataLocation,
     getMaQuan,
     GetShopLocation,
   } = useContext(LocationContext);
+  const [openModal, setOpenModal] = useState(false);
   let token = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME));
   let InforUser = token.pResultThueBao;
   let advertise = token.pResultQua;
@@ -48,7 +55,7 @@ const Product = () => {
     pMaCT: InforUser[0].ma_ct,
     pIDThueBao: InforUser[0].id_tb,
   });
-
+  const [loading, setLoading] = useState(true);
   const onChange = (data) => {
     if (data)
       setdataHuyen({
@@ -62,9 +69,6 @@ const Product = () => {
   };
   const onChangeListShop = async (data) => {
     if (data) {
-      // let newObject = { ...inforProduct };
-      // newObject["pMaCuaHang"] = data.shop_code;
-
       setInforProduct({ ...inforProduct, pMaCuaHang: data.shop_code });
     }
   };
@@ -73,13 +77,17 @@ const Product = () => {
       try {
         const newDataHuyen = await getDataLocation(maSoTinh);
         const newDataProduct = await checkInventory(inforProduct);
+        console.log("newDataProduct", newDataProduct);
+        if (newDataProduct) {
+          setLoading(false);
+        }
       } catch (error) {
         return false;
       }
       return true;
     }
     getData();
-  }, [inforProduct]);
+  }, [inforProduct, maSoTinh]);
   useEffect(() => {
     async function getDataHuyen() {
       try {
@@ -118,7 +126,9 @@ const Product = () => {
     shop_code: item.shop_code,
     label: item.shop_name.substring(0, item.shop_name.indexOf("(") - 1),
   }));
-
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
   const showListsProduct = product.map((e, index) => {
     return (
       <Grid item lg={3}>
@@ -126,6 +136,7 @@ const Product = () => {
       </Grid>
     );
   });
+
   return (
     <Helmet title="nhale">
       <Section>
@@ -150,6 +161,11 @@ const Product = () => {
         </Section>
         <SectionBody>
           <SectionTitle>Quà Tặng</SectionTitle>
+          <SectionTitleProduct>CHỌN CỬA HÀNG ĐẾN NHẬN QUÀ:</SectionTitleProduct>
+          <h3 className="">
+            Tên Cửa Hàng:{" "}
+            {product.length === 0 ? <></> : <span>{product[0].shop_name}</span>}
+          </h3>
           <Grid col={0}>
             <div className="select-main">
               <div className="select-child">
@@ -182,16 +198,36 @@ const Product = () => {
                   onChange={onChangeListShop}
                 />
               </div>
+              <div className="product_btn">
+                <Button size="sm">Chọn</Button>
+              </div>
             </div>
           </Grid>
         </SectionBody>
 
         <SectionBody>
-          <Grid col={4} mdCol={2} smCol={1} gap={30}>
-            {showListsProduct}
-          </Grid>
+          {loading ? (
+            <div className="no-product">
+              <CircularProgress color="primary" />
+            </div>
+          ) : product.length === 0 ? (
+            <div className="no-product">
+              <span>Vui lòng chọn thông tin tỉnh, huyện và tên cửa hàng</span>
+            </div>
+          ) : (
+            <Grid col={4} mdCol={2} smCol={1} gap={30}>
+              {showListsProduct}
+            </Grid>
+          )}
         </SectionBody>
       </Section>
+      <ModalSuccessComponent
+        open={openModal}
+        handleClose={handleCloseModal}
+        title="Số điện thoại hoặc mã quà tặng không chính xác!"
+        // handleClickHome={handleClickHome}
+      />
+      .
     </Helmet>
   );
 };

@@ -15,12 +15,20 @@ export const productReducer = (state, action) => {
         // maTinh: [...state.maTinh, payload],
         productLoading: false,
       };
+    case "CHECK_PRODUCT_LOAD_FAIL":
+      return {
+        ...state,
+        checkProduct: null,
+        productLoading: false,
+      };
+
     case "PRODUCT_LOAD_FAIL":
       return {
         ...state,
         product: [],
         productLoading: false,
       };
+
     default:
       return state;
   }

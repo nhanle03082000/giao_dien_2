@@ -10,7 +10,7 @@
     position: relative;
 
     @include mobile {
-        font-size: 1rem;
+        font-size: 10rem;
     }
 
     &__txt,
@@ -53,4 +53,5 @@
     &-block {
         width: 100%;
     }
+          
 }

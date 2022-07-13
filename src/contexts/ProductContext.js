@@ -10,7 +10,6 @@ const ProductContextProvider = ({ children }) => {
     checkProduct: "",
   });
   const checkInventory = async (dataProdcut) => {
-    console.log("dataProdcut", dataProdcut);
     try {
       const response = await axios.post(
         `${apiUrl_Login}/khoqua/tonkho?a=select`,
@@ -32,8 +31,6 @@ const ProductContextProvider = ({ children }) => {
     }
   };
   const receivingGift = async (dataGift) => {
-    console.log("dataGift", dataGift);
-
     try {
       const response = await axios.post(
         `${apiUrl_Login}/khoqua/tonkho/giuqua?a=select`,
@@ -46,15 +43,20 @@ const ProductContextProvider = ({ children }) => {
           },
         }
       );
-      //   if (response.data) console.log("data gift context", response.data);
-      dispatch({
-        type: "CHECK_PRODUCT_LOAD_SCUSESS",
-        payload: response.data.data,
-      });
-      return response.data.data;
+      if (response.data) {
+        console.log("data gift context", response.data);
+        dispatch({
+          type: "CHECK_PRODUCT_LOAD_SCUSESS",
+          payload: response.data,
+        });
+      } else {
+        dispatch({
+          type: "CHECK_PRODUCT_LOAD_FAIL",
+        });
+      }
+      return response.data;
     } catch (error) {
-      if (error.response.data) return error.response.data;
-      else return { success: false, message: "Server Error" };
+      console.log(error);
     }
   };
   const ProductContextData = {

@@ -8,12 +8,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import check from "../../assets/images/check.png";
 import "./modal.css";
 import { useHistory } from "react-router-dom";
-import path from "../../resources/path";
 
 export default function ModalSuccessComponent(props) {
   const history = useHistory();
   const handleClickHome = () => {
-    history.push(path.LOGIN);
+    // history.push(path.LOGIN);
   };
   return (
     <div>
@@ -35,9 +34,9 @@ export default function ModalSuccessComponent(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClickHome} color="primary">
+          {/* <Button onClick={handleClickHome} color="primary">
             Đăng nhập
-          </Button>
+          </Button> */}
           <Button onClick={props.handleClose} color="secondary" autoFocus>
             Đóng
           </Button>

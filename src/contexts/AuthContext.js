@@ -25,10 +25,8 @@ const AuthContextProvider = ({ children }) => {
         );
 
         dispatch({ type: "SET_AUTH", payload: response.data.data });
-        console.log(response.data.data);
         return response.data.data;
       } else {
-        console.log("khi đăng nhpaja thất bại", response.data);
         localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, null);
         return response.data;
       }
@@ -37,7 +35,6 @@ const AuthContextProvider = ({ children }) => {
     }
   };
   const logoutUser = (props) => {
-    console.log(props);
     localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
   };
   const authContextData = { authState, checkAuth, logoutUser };
