@@ -75,8 +75,11 @@ const ProductCard = (props) => {
       <ModalSuccessComponent
         open={openModal}
         handleClose={handleCloseModal}
-        title="Quý khách đã đăng ký giữ quà thành công. \n Quý khách vui lòng mang theo CCCD/CMND đến cửa hàng để nhận quà trong vòng 48h!"
-        // handleClickHome={handleClickHome}
+        title="Quý khách đã đăng ký giữ quà thành công."
+        titleDesc=" Quý khách vui lòng mang theo CCCD/CMND đến cửa hàng
+         để nhận quà trong vòng 48h!"
+        titleError="Nếu thông tin Số thuê bao của  Quý khách chưa chính xác, vui lòng đăng ký lại thông tin tại cửa hàng MobiFone. "
+        titleErrorDes="Trân trọng cảm ơn quý khách đã sử dụng dịch vụ MobiFone"
       />
     </div>
   );

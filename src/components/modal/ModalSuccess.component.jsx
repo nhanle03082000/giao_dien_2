@@ -22,7 +22,6 @@ export default function ModalSuccessComponent(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Thông báo"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <div className="modal-img">
@@ -30,6 +29,17 @@ export default function ModalSuccessComponent(props) {
             </div>
             <div className="modal-title">
               <span>{props.title}</span>
+            </div>
+            <div className="modal-body">
+              <div className="modal-desc">
+                <span>{props.titleDesc}</span>
+              </div>
+              <div className="modal-error">
+                <span>{props.titleError}</span>
+              </div>
+              <div className="modal-error-2">
+                <span>{props.titleErrorDes}</span>
+              </div>
             </div>
           </DialogContentText>
         </DialogContent>
