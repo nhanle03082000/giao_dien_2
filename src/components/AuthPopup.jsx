@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { CircularProgress, Grid } from "@material-ui/core";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Controls from "./controls/Controls";
@@ -43,9 +43,9 @@ export default function AuthPopup(props) {
     e.preventDefault();
     if (validate()) {
       addOrEdit(values, resetForm);
+      localStorage.setItem("nhanle", values.pISDN);
     }
   };
-
   useEffect(() => {
     if (recordForEdit != null)
       setValues({

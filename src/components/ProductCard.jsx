@@ -6,6 +6,7 @@ import { ProductContext } from "../contexts/ProductContext";
 import Button from "./Button";
 import image_error from "../assets/images/image_error.png";
 import ModalSuccessComponent from "./modal/ModalSuccess.component";
+import ModalErrorComponent from "./modal/ModalError.component";
 const ProductCard = (props) => {
   let token = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME));
   let InforUser = token.pResultThueBao;
@@ -18,6 +19,7 @@ const ProductCard = (props) => {
     `https://imghstq.mobifone9.vn/quatang/${props?.data.linkanh}`
   );
   const [openModal, setOpenModal] = useState(false);
+  const [openModalError, setOpenModalError] = useState(false);
   const [InforGigt, setInforGigt] = useState({
     pIDThueBao: InforUser[0].id_tb,
     pMaKhoTong: product[0].ma_kho_tong,
@@ -37,12 +39,16 @@ const ProductCard = (props) => {
       newObject["pMaQua"] = e;
 
       const newDataGift = await receivingGift(newObject);
+      console.log("newDataGift", newDataGift);
       if (newDataGift.status === 1) {
         setOpenModal(true);
+      } else {
+        setOpenModalError(true);
       }
     }
   };
   const handleCloseModal = () => {
+    setOpenModalError(false);
     setOpenModal(false);
   };
   return (
@@ -53,9 +59,8 @@ const ProductCard = (props) => {
           <img src={imgSrc} alt="Image Note Found" onError={handleError} />
         </div>
       </div>
-
-      <h3 className="product-card__name">{props?.data.ten_qua}</h3>
-
+      {/* <h3 className="product-card__name">{props?.data.ten_qua}</h3> */}
+      <h3 className="product-card__price">{props?.data.ten_qua}</h3>
       <div className="product-card__price">
         <span>Số Lượng: </span>
         {props?.data.tonkho}
@@ -81,6 +86,11 @@ const ProductCard = (props) => {
         titleError="Nếu thông tin Số thuê bao của  Quý khách chưa chính xác, vui lòng đăng ký lại thông tin tại cửa hàng MobiFone. "
         titleErrorDes="Trân trọng cảm ơn quý khách đã sử dụng dịch vụ MobiFone"
       />
+      <ModalErrorComponent
+        open={openModalError}
+        handleClose={handleCloseModal}
+        title="Quà tặng đã hết quý khách vui lòng chọn quà tặng khác"
+      ></ModalErrorComponent>
     </div>
   );
 };

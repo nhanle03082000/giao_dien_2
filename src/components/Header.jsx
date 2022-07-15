@@ -30,6 +30,8 @@ const Header = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [openPopup, setOpenPopup] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  let tokenId = localStorage.getItem("nhanle");
+  console.log("tokenId", tokenId);
   const addOrEdit = async (employee, resetForm) => {
     setIsLoading(true);
     const dataLogin = await checkAuth(employee);
@@ -99,14 +101,21 @@ const Header = () => {
             ))}
             {token ? (
               <div className="header__menu__item header__menu__left__item">
-                <span onClick={() => handleLogut("nhanle")}>Đăng Xuất</span>
+                <p>{tokenId}</p>
+                <div
+                  className="header__menu__item header__menu__left__title"
+                  onClick={handleLogut}
+                >
+                  Đăng Xuất
+                </div>
               </div>
             ) : (
               <div className="header__menu__item header__menu__left__item">
-                <span onClick={() => menuLogin()}>Đăng Nhập</span>
+                <p onClick={() => menuLogin()}>Đăng Nhập</p>
               </div>
             )}
             {isLoading ? <LoadingComponent /> : ""}
+
             <FormInfor
               title="Vui Lòng Điền Thông Tin"
               openPopup={openPopup}

@@ -135,7 +135,7 @@ const Product = () => {
   return (
     <Helmet title="">
       <Section>
-        <SectionTitle>Thông Tin Khách Hàng</SectionTitle>
+        <SectionTitle>THÔNG TIN KHÁCH HÀNG</SectionTitle>
         <Section>
           <SectionBody>
             <Grid col={0} mdCol={0} smCol={1} gap={20}>
@@ -153,64 +153,74 @@ const Product = () => {
             </Grid>
           </SectionBody>
         </Section>
-        <SectionBody>
-          <SectionTitleProduct>Chọn Cửa Hàng Đến Nhận Quà:</SectionTitleProduct>
-          <Grid col={0}>
-            <div className="product-card__select-main">
-              <div className="select-child">
-                <Select
-                  className="basic-single"
-                  classNamePrefix="select"
-                  placeholder="Thành Phố"
-                  options={mappOptions}
-                  onChange={onChange}
-                  name="city"
-                />
+        <div className="wrap-infor-product">
+          <SectionBody>
+            <SectionTitleProduct>
+              CHỌN CỬA HÀNG ĐÉN NHẬN QUÀ:
+            </SectionTitleProduct>
+            <Grid col={0}>
+              <div className="product-card__select-main">
+                <div className="select-child">
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    placeholder="Thành Phố"
+                    options={mappOptions}
+                    onChange={onChange}
+                    name="city"
+                  />
+                </div>
+                <div className="select-child">
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    placeholder="Quận"
+                    options={OptionHuyen}
+                    onChange={onChangeDistrict}
+                    name="district"
+                  />
+                </div>
+                <div className="select-child">
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    placeholder="Cửa Hàng"
+                    options={OptionListShop}
+                    name="shop"
+                    onChange={onChangeListShop}
+                  />
+                </div>
+                <div className="product-card__btn22">
+                  <Button size="sm" onClick={handleSelect}>
+                    Chọn
+                  </Button>
+                </div>
               </div>
-              <div className="select-child">
-                <Select
-                  className="basic-single"
-                  classNamePrefix="select"
-                  placeholder="Quận"
-                  options={OptionHuyen}
-                  onChange={onChangeDistrict}
-                  name="district"
-                />
-              </div>
-              <div className="select-child">
-                <Select
-                  className="basic-single"
-                  classNamePrefix="select"
-                  placeholder="Cửa Hàng"
-                  options={OptionListShop}
-                  name="shop"
-                  onChange={onChangeListShop}
-                />
-              </div>
-              <div className="product-card__btn22">
-                <Button size="sm" onClick={handleSelect}>
-                  Chọn
-                </Button>
-              </div>
-            </div>
-          </Grid>
-          <h3 className="text-product-heading">
-            Tên Cửa Hàng:
+            </Grid>
             {product.length === 0 ? (
               <></>
             ) : (
-              <span className="text-product"> {product[0].shop_name}</span>
+              <>
+                <h3 className="text-product-heading">
+                  Tên cửa hàng:&nbsp;
+                  {product.length === 0 ? (
+                    <></>
+                  ) : (
+                    <p className="text-product"> {product[0].shop_name}</p>
+                  )}
+                </h3>
+                <h3 className="text-product-heading">
+                  Địa chỉ cửa hàng:&nbsp;
+                  {product.length === 0 ? (
+                    <></>
+                  ) : (
+                    <p className="text-product">{product[0].shop_address}</p>
+                  )}
+                </h3>
+              </>
             )}
-          </h3>
-          <h3 className="text-product-heading">
-            Địa chỉ cửa hàng:
-            {product.length === 0 ? (
-              <></>
-            ) : (
-              <span className="text-product"> {product[0].shop_address}</span>
-            )}
-          </h3>
-        </SectionBody>
+          </SectionBody>
+        </div>
 
         <SectionBody>
           {loading ? (
@@ -219,9 +229,7 @@ const Product = () => {
             </div>
           ) : product.length === 0 ? (
             <div className="no-product">
-              <SectionTitleProduct>
-                Vui lòng chọn Tỉnh, Huyện, Cửa hàng
-              </SectionTitleProduct>
+              <span>Vui lòng chọn Tỉnh, Huyện, Cửa hàng</span>
             </div>
           ) : (
             <Grid col={4} mdCol={2} smCol={1} gap={30}>

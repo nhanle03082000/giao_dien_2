@@ -19,7 +19,7 @@ export default function ModalErrorComponent(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Thông báo"}</DialogTitle>
+        {/* <DialogTitle id="alert-dialog-title">{"Thông báo"}</DialogTitle> */}
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <div className="modal-img">
@@ -31,9 +31,9 @@ export default function ModalErrorComponent(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleClickHome} color="primary">
+          {/* <Button onClick={props.handleClickHome} color="primary">
             Đăng Nhập
-          </Button>
+          </Button> */}
           <Button onClick={props.handleClose} color="secondary" autoFocus>
             Đóng
           </Button>

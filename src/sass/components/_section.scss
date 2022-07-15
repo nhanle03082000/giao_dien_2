@@ -1,14 +1,15 @@
 .section {
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 
     & > * ~ * {
-        margin-top: 70px;
+        margin-top: 20px;
     }
 
     &__title {
         font-size: 2rem;
         text-transform: capitalize;
         text-align: center;
+        padding-top: 14px
     }
     &__product{
         padding: 15px 8px 5px;
