@@ -35,6 +35,8 @@ const HeroSlider = (props) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
+    autoplay: true,
+    autoplaySpeed: 1500,
     nextArrow: <SamplePrevArrow />,
     prevArrow: <SampleNextArrow />,
     responsive: [
