@@ -1,7 +1,7 @@
 .policy-card {
     @include flex(center, flex-start);
     width: 100%;
-    padding: 100px;
+    padding: 25px;
     padding-left: 0;
     box-shadow: $box-shadow;
     transition: transform 0.5s ease;
@@ -20,8 +20,13 @@
         }
 
         &__description {
-            font-size: 1rem;
+            font-size: 1.25rem;
+            font-weight: 400;
             color: $txt-second-color;
         }
+        &__span{
+        color: red
+        }
     }
+  
 }

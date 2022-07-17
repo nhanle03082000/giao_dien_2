@@ -10,11 +10,10 @@ const history = createBrowserHistory();
 
 const Routes = () => {
   let token = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME));
-  console.log("usersss in ở routers", token);
   return (
     <Route history={history}>
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={token ? Product : Home} />
         <Route path="/product" component={token ? Product : Home} />
 
         {/* <Route exact path="/" render={() => <Home />} />

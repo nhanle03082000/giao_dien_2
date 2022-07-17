@@ -1,5 +1,5 @@
 .modal-img{
-    width: 25%;
+    width: 15%;
     margin: 0 auto;
 }
 
@@ -10,3 +10,17 @@
     font-size: 20px;
     font-weight: 500;
 }
+
+.modal-body {
+    width: 100%;
+    text-align: center;
+    margin-top:10px;
+    font-size: 15px;
+    font-weight: 400;
+}
+.modal-body .modal-desc{
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+ 

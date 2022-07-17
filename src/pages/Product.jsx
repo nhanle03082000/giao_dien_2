@@ -1,30 +1,37 @@
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useContext, useEffect, useState } from "react";
 import Select from "react-select";
-import productData from "../assets/fake-data/products";
 import Advertise from "../components/Advertise";
 import "../components/controls/index.css";
 import Grid from "../components/Grid";
 import Helmet from "../components/Helmet";
+import ModalSuccessComponent from "../components/modal/ModalSuccess.component";
 import PolicyCard from "../components/PolicyCard";
 import ProductCard from "../components/ProductCard";
-import Section, { SectionBody, SectionTitle } from "../components/Section";
+
+import Button from "../components/Button";
+import Section, {
+  SectionBody,
+  SectionTitle,
+  SectionTitleProduct,
+} from "../components/Section";
 import { LOCAL_STORAGE_TOKEN_NAME } from "../contexts/constant";
 import { LocationContext } from "../contexts/LocationContext";
 import { ProductContext } from "../contexts/ProductContext";
 
 const Product = () => {
-  const productList = productData.getAllProducts();
   const {
     productState: { product },
     checkInventory,
-    receivingGift,
   } = useContext(ProductContext);
+  console.log("product trang chính ", product);
   const {
     Location: { maTinh, maHuyen, dataShop },
     getDataLocation,
     getMaQuan,
     GetShopLocation,
   } = useContext(LocationContext);
+  const [openModal, setOpenModal] = useState(false);
   let token = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME));
   let InforUser = token.pResultThueBao;
   let advertise = token.pResultQua;
@@ -48,7 +55,7 @@ const Product = () => {
     pMaCT: InforUser[0].ma_ct,
     pIDThueBao: InforUser[0].id_tb,
   });
-
+  const [loading, setLoading] = useState();
   const onChange = (data) => {
     if (data)
       setdataHuyen({
@@ -62,27 +69,13 @@ const Product = () => {
   };
   const onChangeListShop = async (data) => {
     if (data) {
-      // let newObject = { ...inforProduct };
-      // newObject["pMaCuaHang"] = data.shop_code;
-
       setInforProduct({ ...inforProduct, pMaCuaHang: data.shop_code });
     }
   };
   useEffect(() => {
-    async function getData() {
-      try {
-        const newDataHuyen = await getDataLocation(maSoTinh);
-        const newDataProduct = await checkInventory(inforProduct);
-      } catch (error) {
-        return false;
-      }
-      return true;
-    }
-    getData();
-  }, [inforProduct]);
-  useEffect(() => {
     async function getDataHuyen() {
       try {
+        const newDataHuyen = await getDataLocation(maSoTinh);
         const newMaHuyen = await getMaQuan(dataHuyen);
       } catch (error) {
         return false;
@@ -90,7 +83,7 @@ const Product = () => {
       return true;
     }
     getDataHuyen();
-  }, [dataHuyen]);
+  }, [dataHuyen, maSoTinh]);
   useEffect(() => {
     async function getDataShop() {
       try {
@@ -118,7 +111,9 @@ const Product = () => {
     shop_code: item.shop_code,
     label: item.shop_name.substring(0, item.shop_name.indexOf("(") - 1),
   }));
-
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
   const showListsProduct = product.map((e, index) => {
     return (
       <Grid item lg={3}>
@@ -126,13 +121,26 @@ const Product = () => {
       </Grid>
     );
   });
+
+  const handleSelect = async () => {
+    setLoading(true);
+
+    const newDataProduct = await checkInventory(inforProduct);
+    console.log("newDataProduct", newDataProduct);
+    if (newDataProduct) {
+      setLoading(false);
+    }
+  };
+
   return (
-    <Helmet title="nhale">
+    <Helmet title="">
       <Section>
-        <SectionTitle>Thông Tin Khách Hàng</SectionTitle>
+        <SectionTitle>THÔNG TIN KHÁCH HÀNG</SectionTitle>
         <Section>
           <SectionBody>
-            <Grid col={2} mdCol={2} smCol={1} gap={20}>
+            <Grid col={0} mdCol={0} smCol={1} gap={20}>
+              {/* <Grid col={2} mdCol={2} smCol={1} gap={20}> */}
+
               {InforUser.map((index, data) => (
                 <PolicyCard
                   key={data}
@@ -142,56 +150,99 @@ const Product = () => {
                   description="chúc mừng quý khách nhiều niềm vui trong cuộc sống"
                 />
               ))}
-              {advertise.map((data, index) => (
-                <Advertise key={index} product={data} />
-              ))}
             </Grid>
           </SectionBody>
         </Section>
-        <SectionBody>
-          <SectionTitle>Quà Tặng</SectionTitle>
-          <Grid col={0}>
-            <div className="select-main">
-              <div className="select-child">
-                <Select
-                  className="basic-single"
-                  classNamePrefix="select"
-                  placeholder="Thành Phố"
-                  options={mappOptions}
-                  onChange={onChange}
-                  name="city"
-                />
+        <div className="wrap-infor-product">
+          <SectionBody>
+            <SectionTitleProduct>
+              CHỌN CỬA HÀNG ĐÉN NHẬN QUÀ:
+            </SectionTitleProduct>
+            <Grid col={0}>
+              <div className="product-card__select-main">
+                <div className="select-child">
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    placeholder="Thành Phố"
+                    options={mappOptions}
+                    onChange={onChange}
+                    name="city"
+                  />
+                </div>
+                <div className="select-child">
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    placeholder="Quận"
+                    options={OptionHuyen}
+                    onChange={onChangeDistrict}
+                    name="district"
+                  />
+                </div>
+                <div className="select-child">
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    placeholder="Cửa Hàng"
+                    options={OptionListShop}
+                    name="shop"
+                    onChange={onChangeListShop}
+                  />
+                </div>
+                <div className="product-card__btn22">
+                  <Button size="sm" onClick={handleSelect}>
+                    Chọn
+                  </Button>
+                </div>
               </div>
-              <div className="select-child">
-                <Select
-                  className="basic-single"
-                  classNamePrefix="select"
-                  placeholder="Quận"
-                  options={OptionHuyen}
-                  onChange={onChangeDistrict}
-                  name="district"
-                />
-              </div>
-              <div className="select-child">
-                <Select
-                  className="basic-single"
-                  classNamePrefix="select"
-                  placeholder="Cửa Hàng"
-                  options={OptionListShop}
-                  name="shop"
-                  onChange={onChangeListShop}
-                />
-              </div>
-            </div>
-          </Grid>
-        </SectionBody>
+            </Grid>
+            {product.length === 0 ? (
+              <></>
+            ) : (
+              <>
+                <h3 className="text-product-heading">
+                  Tên cửa hàng:&nbsp;
+                  {product.length === 0 ? (
+                    <></>
+                  ) : (
+                    <p className="text-product"> {product[0].shop_name}</p>
+                  )}
+                </h3>
+                <h3 className="text-product-heading">
+                  Địa chỉ cửa hàng:&nbsp;
+                  {product.length === 0 ? (
+                    <></>
+                  ) : (
+                    <p className="text-product">{product[0].shop_address}</p>
+                  )}
+                </h3>
+              </>
+            )}
+          </SectionBody>
+        </div>
 
         <SectionBody>
-          <Grid col={4} mdCol={2} smCol={1} gap={30}>
-            {showListsProduct}
-          </Grid>
+          {loading ? (
+            <div className="no-product">
+              <CircularProgress color="primary" />
+            </div>
+          ) : product.length === 0 ? (
+            <div className="no-product">
+              <span>Vui lòng chọn Tỉnh, Huyện, Cửa hàng</span>
+            </div>
+          ) : (
+            <Grid col={4} mdCol={2} smCol={1} gap={30}>
+              {showListsProduct}
+            </Grid>
+          )}
         </SectionBody>
       </Section>
+      <ModalSuccessComponent
+        open={openModal}
+        handleClose={handleCloseModal}
+        title="Số điện thoại hoặc mã quà tặng không chính xác!"
+      />
     </Helmet>
   );
 };

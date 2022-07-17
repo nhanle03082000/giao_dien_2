@@ -6,7 +6,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import error from "../../assets/images/error.png";
-import "./modal.css";
 import { useHistory } from "react-router-dom";
 
 export default function ModalErrorComponent(props) {
@@ -20,7 +19,7 @@ export default function ModalErrorComponent(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Thông báo"}</DialogTitle>
+        {/* <DialogTitle id="alert-dialog-title">{"Thông báo"}</DialogTitle> */}
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <div className="modal-img">
@@ -32,9 +31,9 @@ export default function ModalErrorComponent(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleClickHome} color="primary">
+          {/* <Button onClick={props.handleClickHome} color="primary">
             Đăng Nhập
-          </Button>
+          </Button> */}
           <Button onClick={props.handleClose} color="secondary" autoFocus>
             Đóng
           </Button>
