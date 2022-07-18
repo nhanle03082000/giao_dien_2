@@ -140,6 +140,30 @@
         &:hover {
           color: red;
         }
+        @include mobile {
+          display: block;
+          margin-top: 0px;
+          position: static;
+        }
+        @include tablet {
+          display: block;
+          position: static;
+        }
+      }
+      &__id {
+        display: block;
+        @include mobile {
+          display: none;
+          > p {
+            display: none;
+          }
+        }
+        @include tablet {
+          display: none;
+          > p {
+            display: none;
+          }
+        }
       }
     }
 
@@ -149,6 +173,13 @@
       @include tablet {
         display: block;
         font-size: 2.5rem;
+      }
+    }
+    &__home-icon {
+      display: none;
+      @include tablet {
+        display: flex;
+        padding: 0 8px;
       }
     }
   }

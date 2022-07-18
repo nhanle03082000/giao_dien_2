@@ -101,23 +101,25 @@ const Header = () => {
             ))}
             {token ? (
               <div className="header__menu__item header__menu__left__item">
-                <p>{tokenId}</p>
+                <div className="header__menu__left__id">
+                  <p>{tokenId}</p>
+                </div>
                 <div
                   className="header__menu__item header__menu__left__title"
                   onClick={handleLogut}
                 >
-                  Đăng Xuất
+                  Đăng xuất
                 </div>
               </div>
             ) : (
               <div className="header__menu__item header__menu__left__item">
-                <p onClick={() => menuLogin()}>Đăng Nhập</p>
+                <p onClick={() => menuLogin()}>Đăng nhập</p>
               </div>
             )}
             {isLoading ? <LoadingComponent /> : ""}
 
             <FormInfor
-              title="Vui Lòng Điền Thông Tin"
+              title="Vui lòng điền thông tin"
               openPopup={openPopup}
               setOpenPopup={setOpenPopup}
             >

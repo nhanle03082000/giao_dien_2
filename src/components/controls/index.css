@@ -96,3 +96,6 @@
   color:rgb(23, 127, 218);
   text-transform: capitalize;
 }
+#react-select-2-listbox{
+  width: 339px !important;
+}
