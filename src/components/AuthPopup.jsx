@@ -64,7 +64,7 @@ export default function AuthPopup(props) {
       >
         <Grid>
           <Controls.Input
-            label="Số Điện Thoại"
+            label="Số điện thoại"
             name="pISDN"
             value={values.pISDN}
             onChange={handleInputChange}
@@ -72,16 +72,16 @@ export default function AuthPopup(props) {
           />
           <Controls.Input
             name="pMaXacNhan"
-            label="Mã Quà Tặng"
+            label="Mã quà tặng"
             value={values.pMaXacNhan}
             onChange={handleInputChange}
             error={errors.pMaXacNhan}
           />
 
           <div className="control-button">
-            <Controls.Button type="submit" text="Xác Nhận" />
+            <Controls.Button type="submit" text="Xác nhận" />
             <Controls.Button
-              text="Đặt Lại"
+              text="Đặt lại"
               color="default"
               onClick={resetForm}
             />

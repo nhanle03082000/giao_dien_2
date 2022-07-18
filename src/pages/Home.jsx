@@ -9,7 +9,7 @@ import Section, { SectionBody } from "../components/Section";
 
 const Home = () => {
   return (
-    <Helmet title="Trang chủ">
+    <Helmet title="">
       <Section>
         <HeroSlider control={true} auto={false} timeOut={5000} />
       </Section>

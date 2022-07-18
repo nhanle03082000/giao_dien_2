@@ -134,14 +134,27 @@
         }
       }
       &__title {
-        margin-top: 10px;
         display: none;
         position: absolute;
-        &:hover {
-          color: red;
+        // &:hover {
+        //   color: red;
+        // }
+        @include mobile{
+          display: block;
+          margin-top: 0px;
+          position: static;
+         
+        }
+      }
+      &__id{
+        display: block;
+        @include mobile{
+          display: none;
+         
         }
       }
     }
+    
 
     &__mobile-toggle {
       display: none;
