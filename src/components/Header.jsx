@@ -12,6 +12,11 @@ const mainNav = [
     display: "Trang chủ",
     path: "/",
   },
+
+  // {
+  //   display: "Đăng Nhập",
+  //   path: "/product",
+  // },
 ];
 
 const Header = () => {
@@ -100,21 +105,21 @@ const Header = () => {
                   <p>{tokenId}</p>
                 </div>
                 <div
-                  className="header__menu__item header__menu__left__title "
+                  className="header__menu__item header__menu__left__title"
                   onClick={handleLogut}
                 >
                   Đăng xuất
                 </div>
               </div>
             ) : (
-              <div className="header__menu__item header__menu__left__item ">
+              <div className="header__menu__item header__menu__left__item">
                 <p onClick={() => menuLogin()}>Đăng nhập</p>
               </div>
             )}
             {isLoading ? <LoadingComponent /> : ""}
 
             <FormInfor
-              title="Vui Lòng Điền Thông Tin"
+              title="Vui lòng điền thông tin"
               openPopup={openPopup}
               setOpenPopup={setOpenPopup}
             >

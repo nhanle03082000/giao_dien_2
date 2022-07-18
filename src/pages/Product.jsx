@@ -115,11 +115,7 @@ const Product = () => {
     setOpenModal(false);
   };
   const showListsProduct = product.map((e, index) => {
-    return (
-      <Grid item lg={3}>
-        <ProductCard data={e} />
-      </Grid>
-    );
+    return <ProductCard data={e} />;
   });
 
   const handleSelect = async () => {
@@ -164,7 +160,7 @@ const Product = () => {
                   <Select
                     className="basic-single"
                     classNamePrefix="select"
-                    placeholder="Thành Phố"
+                    placeholder="Thành phố"
                     options={mappOptions}
                     onChange={onChange}
                     name="city"
@@ -184,7 +180,7 @@ const Product = () => {
                   <Select
                     className="basic-single"
                     classNamePrefix="select"
-                    placeholder="Cửa Hàng"
+                    placeholder="Cửa hàng"
                     options={OptionListShop}
                     name="shop"
                     onChange={onChangeListShop}

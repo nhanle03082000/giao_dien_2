@@ -1,7 +1,8 @@
 import axios from "axios";
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useContext } from "react";
 import { authReducer } from "../reducers/authReducer";
 import { apiUrl_Login, LOCAL_STORAGE_TOKEN_NAME } from "./constant";
+import { ProductContext } from "./ProductContext";
 
 export const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
@@ -10,6 +11,9 @@ const AuthContextProvider = ({ children }) => {
     user: "",
     authLoading: true,
   });
+  const {
+    productState: { product },
+  } = useContext(ProductContext);
   const checkAuth = async (userForm) => {
     try {
       const response = await axios.post(
