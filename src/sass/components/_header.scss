@@ -37,6 +37,13 @@
     inset: 0;
     pointer-events: none;
     padding: 0 50px;
+    @include mobile {
+    padding: 4px 10px;
+    margin-top: 8px;
+    }
+    @include tablet{
+      padding: 0 20px;
+    }
 
     img {
       height: 35px;
@@ -141,9 +148,9 @@
       &__title {
         display: none;
         position: absolute;
-        // &:hover {
-        //   color: red;
-        // }
+        &:hover {
+          color: red;
+        }
         @include mobile{
           display: block;
           margin-top: 0px;
@@ -151,22 +158,22 @@
          
         }
       }
-      &__id{
-        display: block;
-        @include tablet{
-          display: none;
+      // &__id{
+      //   display: block;
+      //   @include tablet{
+      //     display: none;
          
-        }
-        @include mobile {
-          display: block;
-          margin-top: 0px;
-          position: static;
-        }
-        @include tablet {
-          display: block;
-          position: static;
-        }
-      }
+      //   }
+      //   @include mobile {
+      //     display: block;
+      //     margin-top: 0px;
+      //     position: static;
+      //   }
+      //   @include tablet {
+      //     display: block;
+      //     position: static;
+      //   }
+      // }
       &__id {
         display: block;
         @include mobile {
@@ -176,9 +183,9 @@
           }
         }
         @include tablet {
-          display: none;
+          display: flex;
           > p {
-            display: none;
+            display: flex;
           }
         }
       }
@@ -193,12 +200,13 @@
         font-size: 2.5rem;
       }
     }
-    &__home-icon {
-      display: none;
-      @include tablet {
-        display: flex;
-        padding: 0 8px;
-      }
-    }
+    // &__home-icon {
+    //   display: none;
+    //   @include tablet {
+    //     display: flex;
+    //     padding: 0 8px;
+    //   }
+    // }
+    
   }
 }
