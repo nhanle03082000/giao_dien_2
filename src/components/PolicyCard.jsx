@@ -17,7 +17,7 @@ const PolicyCard = (props) => {
           Kính Mời Quý Khách{" "}
           <span className="description-span">{props?.name}</span>, ngày sinh:
           <span className="description-span"> {startdate} </span>
-          chọn các quà tặng bên dưới
+          chọn:
         </div>
         {/* <div className="policy-card__info__description">
           Ngày sinh: {startdate}

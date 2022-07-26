@@ -19,8 +19,10 @@
     font-weight: 400;
 }
 .modal-body .modal-desc{
-    max-width: 75%;
+    max-width: 90%;
     margin: 0 auto;
 }
-
+.modal-desc p{
+ flex-wrap: nowrap;
+}
  

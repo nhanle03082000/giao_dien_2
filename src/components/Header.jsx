@@ -9,7 +9,7 @@ import FormInfor from "./FormInfor";
 import LoadingComponent from "./loading/Loading.component";
 const mainNav = [
   {
-    display: "Trang chủ",
+    display: "",
     path: "/",
   },
 
@@ -53,11 +53,9 @@ const Header = () => {
 
   const menuToggle = () => menuLeft.current.classList.toggle("active");
   const menuLogin = () => {
-    menuToggle();
     setOpenPopup(true);
   };
   const handleLogut = (props) => {
-    menuToggle();
     logoutUser("hello nhanle");
     history.push({
       pathname: "/",
@@ -79,13 +77,13 @@ const Header = () => {
           </Link>
         </div>
         <div className="header__menu">
-          <div className="header__menu__mobile-toggle" onClick={menuToggle}>
+          {/* <div className="header__menu__mobile-toggle" onClick={menuToggle}>
             <i className="bx bx-menu-alt-left"></i>
-          </div>
-          <div className="header__menu__left" ref={menuLeft}>
-            <div className="header__menu__left__close" onClick={menuToggle}>
+          </div> */}
+          <div className="test-header">
+            {/* <div className="header__menu__left__close" onClick={menuToggle}>
               <i className="bx bx-chevron-left"></i>
-            </div>
+            </div> */}
             {mainNav.map((item, index) => (
               <div
                 key={index}
@@ -100,20 +98,20 @@ const Header = () => {
               </div>
             ))}
             {token ? (
-              <div className="header__menu__item header__menu__left__item">
+              <div className=" header__menu__left__item">
                 <div className="header__menu__left__id">
                   <p>{tokenId}</p>
                 </div>
                 <div
-                  className="header__menu__item header__menu__left__title"
+                  className="header__menu__left__title"
                   onClick={handleLogut}
                 >
-                  Đăng xuất
+                  <p> Đăng xuất</p>
                 </div>
               </div>
             ) : (
               <div className="header__menu__item header__menu__left__item">
-                <p onClick={() => menuLogin()}>Đăng nhập</p>
+                <p onClick={() => menuLogin()}>Thuê bao đăng nhập</p>
               </div>
             )}
             {isLoading ? <LoadingComponent /> : ""}

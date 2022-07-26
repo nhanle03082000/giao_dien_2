@@ -43,8 +43,7 @@ const ProductCard = (props) => {
       if (newDataGift.status === 1) {
         setOpenModal(true);
       } else {
-        setOpenModal(true);
-        // setOpenModalError(true);
+        setOpenModalError(true);
       }
     }
   };
@@ -61,7 +60,7 @@ const ProductCard = (props) => {
         </div>
       </div>
       {/* <h3 className="product-card__name">{props?.data.ten_qua}</h3> */}
-      <h3 className="product-card__price">{props?.data.ten_qua}</h3>
+      <h3 className="product-card__price">Tên quà: {props?.data.ten_qua}</h3>
       <div className="product-card__price">
         <span>Số Lượng: </span>
         {props?.data.tonkho}
@@ -90,7 +89,7 @@ const ProductCard = (props) => {
       <ModalErrorComponent
         open={openModalError}
         handleClose={handleCloseModal}
-        title="Quà tặng đã hết quý khách vui lòng chọn quà tặng hoặc cửa hàng khác"
+        title="Quà tặng đã hết quý khách vui lòng chọn quà tặng khác hoặc cửa hàng khác. Cảm ơn quý khách! "
       ></ModalErrorComponent>
     </div>
   );
